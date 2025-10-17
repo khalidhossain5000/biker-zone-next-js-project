@@ -61,7 +61,7 @@ const NavItem = () => {
         </ul>
       </div>
       {/* theme toggle and login button */}
-      <div className="space-x-6">
+      <div className="flex items-center gap-6">
         <ModeToggle></ModeToggle>
         <button>
             <Button className='cursor-pointer'>Login</Button>
