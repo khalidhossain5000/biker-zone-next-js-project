@@ -22,8 +22,10 @@ const Slider = () => {
     <Swiper
       navigation={true}
       modules={[Navigation]}
-      className="mySwiper bg-[#fdf1ee] dark:bg-primary rounded-2xl shadow-md"
+      className="mySwiper bg-[#fdf1ee] dark:bg-[#1e1412] rounded-2xl shadow-md mt-6 lg:mt-14"
+      loop={true}
     >
+
       <SwiperSlide>
         <div className="flex flex-col lg:flex-row items-center p-12 md:p-16 lg:p-36">
           <div className="flex-1 space-y-6 ">
@@ -40,7 +42,7 @@ const Slider = () => {
             </div>
           </div>
           <div className="flex-1 pt-6 lg:pt-0">
-            <Image src={img1} width={500} height={500} className="mx-auto "></Image>
+            <Image src={img1} width={500} height={500} alt="bike-slider-image" className="mx-auto "></Image>
           </div>
         </div>
       </SwiperSlide>
@@ -61,7 +63,7 @@ const Slider = () => {
             </div>
           </div>
           <div className="flex-1 pt-6 lg:pt-0">
-            <Image src={img2} width={500} height={500} className="mx-auto "></Image>
+            <Image alt="bike-slider-image" src={img2} width={500} height={500} className="mx-auto "></Image>
           </div>
         </div>
       </SwiperSlide>
@@ -82,7 +84,7 @@ const Slider = () => {
             </div>
           </div>
           <div className="flex-1 pt-6 lg:pt-0">
-            <Image src={img3} width={500} height={500} className="mx-auto "></Image>
+            <Image alt="bike-slider-image" src={img3} width={500} height={500} className="mx-auto "></Image>
           </div>
         </div>
       </SwiperSlide>
@@ -103,7 +105,7 @@ const Slider = () => {
             </div>
           </div>
           <div className="flex-1 pt-6 lg:pt-0">
-            <Image src={img4} width={500} height={500} className="mx-auto "></Image>
+            <Image alt="bike-slider-image" src={img4} width={500} height={500} className="mx-auto "></Image>
           </div>
         </div>
       </SwiperSlide>
@@ -124,7 +126,7 @@ const Slider = () => {
             </div>
           </div>
           <div className="flex-1 pt-6 lg:pt-0">
-            <Image src={img5} width={500} height={500} className="mx-auto "></Image>
+            <Image alt="bike-slider-image" src={img5} width={500} height={500} className="mx-auto "></Image>
           </div>
         </div>
       </SwiperSlide>
