@@ -9,14 +9,16 @@ const NavItem = () => {
   const pathname = usePathname();
   return (
     <div className="flex items-center gap-12">
-        {/* menu-items */}
+      {/* menu-items */}
       <div>
-        <ul className="flex items-center gap-6 text-[17px] text-primary font-medium">
+        <ul className="flex items-center gap-6 text-[17px] font-medium ">
           <li>
             <Link
               href={"/"}
               className={
-                pathname === "/" ? "text-blue-500 font-bold" : "text-gray-700"
+                pathname === "/"
+                  ? "text-blue-500 font-bold"
+                  : "text-gray-700 dark:text-white"
               }
             >
               Home
@@ -28,7 +30,7 @@ const NavItem = () => {
               className={
                 pathname === "/shop"
                   ? "text-blue-500 font-bold"
-                  : "text-gray-700"
+                  : "text-gray-700 dark:text-white"
               }
             >
               Shop
@@ -40,7 +42,7 @@ const NavItem = () => {
               className={
                 pathname === "/news"
                   ? "text-blue-500 font-bold"
-                  : "text-gray-700"
+                  : "text-gray-700 dark:text-white"
               }
             >
               News
@@ -52,7 +54,7 @@ const NavItem = () => {
               className={
                 pathname === "/contact"
                   ? "text-blue-500 font-bold"
-                  : "text-gray-700"
+                  : "text-gray-700 dark:text-white"
               }
             >
               Contact
@@ -63,9 +65,9 @@ const NavItem = () => {
       {/* theme toggle and login button */}
       <div className="flex items-center gap-6">
         <ModeToggle></ModeToggle>
-        <button>
-            <Button className='cursor-pointer'>Login</Button>
-        </button>
+        
+          <Button className="cursor-pointer">Login</Button>
+        
       </div>
     </div>
   );
