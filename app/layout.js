@@ -1,6 +1,7 @@
+import { ThemeProvider } from "@/Providers/themeprovider";
 import "./globals.css";
-
 import { Poppins, Inter } from "next/font/google";
+import NavBar from "@/components/(Global)/HomeNav/NavBar/NavBar";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -23,7 +24,15 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={`${poppins.variable} ${inter.variable} antialiased`}>
+        <NavBar></NavBar>
+         <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
+          >
         {children}
+        </ThemeProvider>
       </body>
     </html>
   );
