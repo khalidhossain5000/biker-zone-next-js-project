@@ -66,7 +66,7 @@ const NavItem = () => {
       <div className="flex items-center gap-6">
         <ModeToggle></ModeToggle>
         
-          <Button className="cursor-pointer">Login</Button>
+         <Link href='/login'> <Button  className="cursor-pointer">Login</Button></Link>
         
       </div>
     </div>
