@@ -35,7 +35,7 @@ const LoginPage = () => {
     </div>
 
     {/* Login Form */}
-    <div className="w-full max-w-md">
+    <div className="w-full max-w-3xl">
       <h2 className="text-3xl font-bold mb-6 text-center text-gray-800 dark:text-white">
         Welcome Back
       </h2>

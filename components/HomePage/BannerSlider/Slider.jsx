@@ -22,6 +22,7 @@ const Slider = () => {
     <Swiper
       navigation={true}
       modules={[Navigation]}
+     
       className="mySwiper bg-[#fdf1ee] dark:bg-[#1e1412] rounded-2xl shadow-md mt-6 lg:mt-14"
       loop={true}
     >

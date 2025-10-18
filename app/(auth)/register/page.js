@@ -34,7 +34,7 @@ const Register = () => {
         </div>
 
         {/* Register Form */}
-        <form className="w-full max-w-sm space-y-5">
+        <form className="w-full max-w-3xl space-y-5">
           <h2 className="text-3xl font-bold text-gray-800 dark:text-gray-100 text-center mb-6">
             Create Account
           </h2>

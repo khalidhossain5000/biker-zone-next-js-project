@@ -7,7 +7,7 @@ import ResponsiveMenu from "../../ReponsiveSIdebarMenu/ResponsiveMenu";
 
 const NavBar = () => {
   return (
-    <nav className="py-6 container mx-auto flex items-center justify-between lg:pr-3 xl:pr-1">
+    <nav className="sticky  top-0 py-6 container mx-auto flex items-center justify-between lg:pr-3 xl:pr-1">
       <div className="logo dark:hidden">
         <Image
           src={logo}
@@ -33,7 +33,7 @@ const NavBar = () => {
         <NavItem></NavItem>
       </div>
 
-      {/* ?mobile responsive menu start here */}
+      {/* mobile responsive menu start here */}
       <ResponsiveMenu/>
     </nav>
   );
