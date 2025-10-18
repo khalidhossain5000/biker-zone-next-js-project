@@ -6,6 +6,7 @@ import logo from "../../../assets/logo/logo-go.png";
 import darklogo from "../../../assets/logo/dark-logo.png";
 import { useTheme } from "next-themes";
 import Link from "next/link";
+import SocialLogin from "@/components/(Global)/SocialLogin/SocialLogin";
 
 const Register = () => {
   const { theme } = useTheme();
@@ -93,6 +94,10 @@ const Register = () => {
           >
             Register
           </button>
+
+<SocialLogin/>
+
+
 
           <p className="text-center text-sm text-gray-600 dark:text-gray-400">
             Already have an account?{" "}
