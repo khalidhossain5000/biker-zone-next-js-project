@@ -7,19 +7,25 @@ import darklogo from "../../../assets/logo/dark-logo.png";
 import { useTheme } from "next-themes";
 import Link from "next/link";
 import SocialLogin from "@/components/(Global)/SocialLogin/SocialLogin";
+import axios from "axios";
 
 const Register = () => {
   const { theme } = useTheme();
-
+  const handleRegister = async(e) => {
+    e.preventDefault();
+    const name = e.target.name.value;
+    const email = e.target.email.value;
+    const password = e.target.password.value;
+    const res=await axios.post('/api/auth/register',{name,email,password})
+    alert("success register",)
+    console.log('this is res',res);
+    
+  };
   return (
     <div className="min-h-screen flex">
       {/* Left Side - Image */}
       <div className="w-1/2 hidden md:block min-h-full ">
-        <Image
-          src={authImg}
-          alt="Register illustration"
-          className=" h-full"
-        />
+        <Image src={authImg} alt="Register illustration" className=" h-full" />
       </div>
 
       {/* Right Side - Form */}
@@ -35,7 +41,7 @@ const Register = () => {
         </div>
 
         {/* Register Form */}
-        <form className="w-full max-w-3xl space-y-5">
+        <form onSubmit={handleRegister} className="w-full max-w-3xl space-y-5">
           <h2 className="text-3xl font-bold text-gray-800 dark:text-gray-100 text-center mb-6">
             Create Account
           </h2>
@@ -48,7 +54,8 @@ const Register = () => {
               Full Name
             </label>
             <input
-              id="name"
+              name="name"
+
               type="text"
               placeholder="Enter your full name"
               className="w-full px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-md outline-none focus:ring-2 focus:ring-primary dark:bg-[#1f1f1f] dark:text-gray-100"
@@ -64,7 +71,7 @@ const Register = () => {
               Email
             </label>
             <input
-              id="email"
+              name="email"
               type="email"
               placeholder="Enter your email"
               className="w-full px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-md outline-none focus:ring-2 focus:ring-primary dark:bg-[#1f1f1f] dark:text-gray-100"
@@ -82,6 +89,7 @@ const Register = () => {
             <input
               id="password"
               type="password"
+              name="password"
               placeholder="Enter your password"
               className="w-full px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-md outline-none focus:ring-2 focus:ring-primary dark:bg-[#1f1f1f] dark:text-gray-100"
               required
@@ -95,13 +103,14 @@ const Register = () => {
             Register
           </button>
 
-<SocialLogin/>
-
-
+          <SocialLogin />
 
           <p className="text-center text-sm text-gray-600 dark:text-gray-400">
             Already have an account?{" "}
-            <Link href="/login" className="text-primary font-medium hover:underline cursor-pointer">
+            <Link
+              href="/login"
+              className="text-primary font-medium hover:underline cursor-pointer"
+            >
               Login
             </Link>
           </p>

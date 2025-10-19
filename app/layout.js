@@ -1,6 +1,7 @@
 import { ThemeProvider } from "@/Providers/themeprovider";
 import "./globals.css";
 import { Poppins, Inter } from "next/font/google";
+import { Toaster } from "react-hot-toast";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -29,8 +30,8 @@ export default function RootLayout({ children }) {
           enableSystem
           disableTransitionOnChange
         >
-         
           {children}
+          <Toaster position="top-center" reverseOrder={false} />
         </ThemeProvider>
       </body>
     </html>
