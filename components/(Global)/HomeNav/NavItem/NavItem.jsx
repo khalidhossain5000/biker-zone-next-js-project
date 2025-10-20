@@ -4,9 +4,15 @@ import { usePathname } from "next/navigation";
 import React from "react";
 import { ModeToggle } from "../../Theme/ThemeToggle";
 import { Button } from "@/components/ui/button";
+import { useSession } from "next-auth/react";
 
 const NavItem = () => {
   const pathname = usePathname();
+  const { data: session, status } = useSession();
+  if (status === "loading") {
+    return <p className="text-gray-500">Loading user info...</p>;
+  }
+
   return (
     <div className="flex items-center gap-12">
       {/* menu-items */}
@@ -65,9 +71,19 @@ const NavItem = () => {
       {/* theme toggle and login button */}
       <div className="flex items-center gap-6">
         <ModeToggle></ModeToggle>
-        
-         <Link href='/login'> <Button  className="cursor-pointer">Login</Button></Link>
-        
+
+        {session?.user && (
+          <div className="flex justify-center mb-3">
+            <h2 className="text-xl font-bold text-black">{session?.user.email}</h2>
+          </div>
+        )}
+
+        {!session && (
+          <Link href="/login">
+            {" "}
+            <Button className="cursor-pointer">Login</Button>
+          </Link>
+        )}
       </div>
     </div>
   );
