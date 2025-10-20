@@ -4,7 +4,7 @@ import { usePathname } from "next/navigation";
 import React from "react";
 import { ModeToggle } from "../../Theme/ThemeToggle";
 import { Button } from "@/components/ui/button";
-import { useSession } from "next-auth/react";
+import { signOut, useSession } from "next-auth/react";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -102,6 +102,15 @@ const NavItem = () => {
                   </h2>
                 </div>
               </DropdownMenuItem>
+              <DropdownMenuItem className="w-fit text-center px-8 py-1 border-[#8fda20] border-4 font-bold text-base text-[#8fda20] rounded-full bg-black dark:hover:bg-white dark:hover:text-black cursor-pointer">
+                      <Link href="/dashboard">Dashboard</Link>
+                    </DropdownMenuItem>
+                    <DropdownMenuItem
+                      className="text-lg px-12 py-1 bg-red-500 text-white rounded hover:bg-red-600 transition my-2 font-semibold cursor-pointer text-center"
+                      onClick={() => signOut({ callbackUrl: "/" })}
+                    >
+                      Logout
+                    </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
         )}
@@ -113,6 +122,7 @@ const NavItem = () => {
           </Link>
         )}
       </div>
+      
     </div>
   );
 };
