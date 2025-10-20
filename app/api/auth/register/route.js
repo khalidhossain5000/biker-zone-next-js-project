@@ -5,7 +5,7 @@ import { hash } from "bcryptjs";
 export async function POST(req) {
   // Extract data from the request body
   const { name, email, password } = await req.json();
-
+console.log(name,email,password,req.json ,'this is req hjsib fuke');
   // Connect to the MongoDB 'users' collection
   const usersCollection = await getUsersCollection();
 
@@ -19,6 +19,7 @@ export async function POST(req) {
   const hashedPassword = await hash(password, 10);
 
   //  Insert the new user into the database
+  console.log(name,email,password,'frm route register js file here ')
   await usersCollection.insertOne({
     name,
     email,

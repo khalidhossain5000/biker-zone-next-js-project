@@ -16,7 +16,7 @@ const Register = () => {
     const name = e.target.name.value;
     const email = e.target.email.value;
     const password = e.target.password.value;
-    const res=await axios.post('/api/auth/register',{name,email,password})
+    const res=await axios.post('api/auth/register',{name,email,password})
     alert("success register",)
     console.log('this is res',res);
     
