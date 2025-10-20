@@ -8,6 +8,7 @@ import { useTheme } from "next-themes";
 import Link from "next/link";
 import SocialLogin from "@/components/(Global)/SocialLogin/SocialLogin";
 import axios from "axios";
+import toast from "react-hot-toast";
 
 const Register = () => {
   const { theme } = useTheme();
@@ -16,9 +17,10 @@ const Register = () => {
     const name = e.target.name.value;
     const email = e.target.email.value;
     const password = e.target.password.value;
-    const res=await axios.post('api/auth/register',{name,email,password})
+    const res=await axios.post('api/auth/register',{name,email,password,role:'user'})
     alert("success register",)
     console.log('this is res',res);
+    toast.success("user registered successfully")
     
   };
   return (
