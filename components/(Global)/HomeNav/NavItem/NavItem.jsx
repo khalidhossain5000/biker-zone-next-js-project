@@ -5,7 +5,15 @@ import React from "react";
 import { ModeToggle } from "../../Theme/ThemeToggle";
 import { Button } from "@/components/ui/button";
 import { useSession } from "next-auth/react";
-
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import Image from "next/image";
 const NavItem = () => {
   const pathname = usePathname();
   const { data: session, status } = useSession();
@@ -73,9 +81,29 @@ const NavItem = () => {
         <ModeToggle></ModeToggle>
 
         {session?.user && (
-          <div className="flex justify-center mb-3">
-            <h2 className="text-xl font-bold text-black">{session?.user.email}</h2>
-          </div>
+          <DropdownMenu>
+            <DropdownMenuTrigger>
+              <Image
+                src={
+                  session.user.image ||
+                  "https://i.ibb.co/zVB99J4d/DEFAULT.jpg"
+                }
+                alt="user profile image here added"
+                width={50}
+                height={50}
+                className="rounded-full cursor-pointer"
+              />
+            </DropdownMenuTrigger>
+            <DropdownMenuContent>
+              <DropdownMenuItem>
+                <div className="flex justify-center mb-3">
+                  <h2 className="text-xl font-bold text-black">
+                   Email: {session?.user.email}
+                  </h2>
+                </div>
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
         )}
 
         {!session && (
