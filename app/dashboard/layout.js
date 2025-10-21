@@ -1,7 +1,6 @@
-
 import DashboardSidebar from "@/components/Dashboard/layout/DashboardSidebar";
+import LogoAndInfo from "@/components/Dashboard/layout/LogoandInfo/LogoAndInfo";
 import React from "react";
-
 
 export const metadata = {
   title: "Dashboard",
@@ -10,16 +9,14 @@ export const metadata = {
 
 export default function DashboardLayout({ children }) {
   return (
-    <div className="min-h-screen flex">
+    <div className=" lg:min-h-screen flex">
       {/* Sidebar */}
-      <aside className="">
-       <DashboardSidebar/>
-        
-      </aside>
+
+      <DashboardSidebar />
 
       {/* Main Content */}
-      <main className="flex-1 bg-gray-100">
-        <h2 className="text-red-600 bg-gray-300 py-6">User name and email will be dispayed here</h2>
+      <main className="flex-1 bg-gray-100 dark:bg-[#121212]">
+        <LogoAndInfo/>
         {children}
       </main>
     </div>

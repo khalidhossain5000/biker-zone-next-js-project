@@ -19,12 +19,13 @@ import { usePathname } from "next/navigation";
 import { ModeToggle } from "../Theme/ThemeToggle";
 import { Button } from "@/components/ui/button";
 import { useSession } from "next-auth/react";
-import Image from "next/image";
+
 const ResponsiveMenu = () => {
   const pathname = usePathname();
   const { data: session } = useSession();
   return (
     <div className="lg:hidden">
+
       <Sheet>
         <SheetTrigger>
           <Menu className="text-black mr-2" size={40} />
@@ -148,6 +149,7 @@ const ResponsiveMenu = () => {
           </SheetHeader>
         </SheetContent>
       </Sheet>
+
     </div>
   );
 };
