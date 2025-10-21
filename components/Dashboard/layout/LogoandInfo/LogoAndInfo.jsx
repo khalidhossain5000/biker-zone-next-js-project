@@ -1,28 +1,13 @@
-'use client'
+"use client";
 import React from "react";
-import logo from "../../../../assets/logo/logo-go.png";
-import darklogo from "../../../../assets/logo/dark-logo.png";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
 const LogoAndInfo = () => {
   const { data: session } = useSession();
   return (
-    <div className="flex justify-between items-center px-6 py-6 bg-white shadow-xl">
+    <div className="hidden lg:flex justify-between items-center px-6 py-6 bg-white dark:bg-gray-900 shadow-xl">
       <div className="logoh">
-        <Image
-          src={logo}
-          alt="Logo of the site"
-          className="dark:hidden"
-          width={250}
-          height={250}
-        />
-        <Image
-          src={darklogo}
-          alt="Logo of the site"
-          className="hidden dark:block"
-          width={250}
-          height={250}
-        />
+        <h2 className="text-2xl font-bold text-black dark:text-white">Admin/User Dashboard</h2>
       </div>
       {/* user info  */}
       <div>
@@ -37,12 +22,16 @@ const LogoAndInfo = () => {
               height={50}
               className="rounded-full cursor-pointer"
             />
-            <h2 className="text-xl font-bold text-black">
-              Email: {session?.user.email}
-            </h2>
+            <div>
+              <h2 className="text-xl font-bold text-black dark:text-white">
+                Email: {session?.user.email}
+              </h2>
+              <p>Role:User/Admin</p>
+            </div>
           </div>
         )}
       </div>
+      {/*  */}
     </div>
   );
 };

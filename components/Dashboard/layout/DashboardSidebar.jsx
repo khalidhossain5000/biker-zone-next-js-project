@@ -6,7 +6,8 @@ import { usePathname } from "next/navigation";
 import { ModeToggle } from "@/components/(Global)/Theme/ThemeToggle";
 import { signOut } from "next-auth/react";
 import ResponsiveSidebarMenu from "./ResponsiveSidebarMenu";
-
+import logo from "../../../assets/logo/logo-go.png";
+import darklogo from "../../../assets/logo/dark-logo.png";
 import Image from "next/image";
 const DashboardSidebar = () => {
   const pathname = usePathname();
@@ -31,31 +32,44 @@ const DashboardSidebar = () => {
 
   return (
     <div>
-        
-      <aside className="hidden lg:flex lg:flex-col lg:w-64 lg:h-screen bg-[#0a8cb4] dark:bg-[#004e66] text-white justify-between px-3 py-5">
-        {/* Top Routes */}
-        <div className=" flex flex-col gap-4">
-          
-            
-          {sidebarRoutes.map((route, idx) => {
-            const isActive = pathname === route.path;
-            return (
-              <Link
-                key={idx}
-                href={route.path}
-                className={`flex items-center gap-3 px-4 py-3 rounded-lg transition-colors ${
-                  isActive
-                    ? "bg-[#004e66] dark:bg-[#0a8cb4] text-white font-semibold"
-                    : "hover:bg-gray-800"
-                }`}
-              >
-                {route.icon}
-                <span>{route.name}</span>
-              </Link>
-            );
-          })}
+      <aside className="hidden lg:flex lg:flex-col lg:h-screen bg-[#ffffff] dark:bg-[#25b3d8] text-white justify-between px-3 py-5 ">
+        <div>
+          {/* logo  */}
+          <div className="logoh mb-12">
+            <Image
+              src={logo}
+              alt="Logo of the site"
+              className="dark:hidden"
+              width={250}
+            />
+            <Image
+              src={darklogo}
+              alt="Logo of the site"
+              className="hidden dark:block"
+              width={250}
+            />
+          </div>
+          {/* Top Routes */}
+          <div className=" flex flex-col gap-4">
+            {sidebarRoutes.map((route, idx) => {
+              const isActive = pathname === route.path;
+              return (
+                <Link
+                  key={idx}
+                  href={route.path}
+                  className={`flex items-center gap-3 px-4 py-3 rounded-lg transition-colors ${
+                    isActive
+                      ? "bg-[#004e66] dark:bg-[#0a8cb4] text-white font-semibold"
+                      : "hover:bg-gray-800 text-black"
+                  }`}
+                >
+                  {route.icon}
+                  <span>{route.name}</span>
+                </Link>
+              );
+            })}
+          </div>
         </div>
-
         {/* Bottom Logout */}
         <div className="flex items-center gap-6">
           <ModeToggle />
@@ -70,7 +84,6 @@ const DashboardSidebar = () => {
       {/* mobile dashboard menu start from here */}
       <div className="lg:hidden">
         <ResponsiveSidebarMenu
-          sidebarRoutes={sidebarRoutes}
         ></ResponsiveSidebarMenu>
       </div>
     </div>

@@ -17,6 +17,7 @@ import img3 from '../../../assets/slider/bike3.png'
 import img4 from '../../../assets/slider/bike4.png'
 import img5 from '../../../assets/slider/bike-5.png'
 import Image from "next/image";
+
 const Slider = () => {
   return (
     <Swiper

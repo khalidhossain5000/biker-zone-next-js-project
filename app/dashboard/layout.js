@@ -9,14 +9,15 @@ export const metadata = {
 
 export default function DashboardLayout({ children }) {
   return (
-    <div className=" lg:min-h-screen flex">
+    <div className=" min-h-screen flex flex-col lg:flex-row">
       {/* Sidebar */}
-
-      <DashboardSidebar />
+      <div>
+        <DashboardSidebar />
+      </div>
 
       {/* Main Content */}
       <main className="flex-1 bg-gray-100 dark:bg-[#121212]">
-        <LogoAndInfo/>
+        <LogoAndInfo />
         {children}
       </main>
     </div>
