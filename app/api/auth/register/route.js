@@ -4,7 +4,8 @@ import { hash } from "bcryptjs";
 export async function POST(req) {
   // Extract data from the request body
   const { name, email, password, role } = await req.json();
-  console.log(req.json, "this is req hjsib fuke");
+  
+  console.log(name,email,password,role, "this is req hjsib fuke");
   // Connect to the MongoDB 'users' collection
   const usersCollection = await getUsersCollection();
 

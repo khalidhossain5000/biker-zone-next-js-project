@@ -9,20 +9,63 @@ import Link from "next/link";
 import SocialLogin from "@/components/(Global)/SocialLogin/SocialLogin";
 import axios from "axios";
 import toast from "react-hot-toast";
+import { signIn } from "next-auth/react";
 
 const Register = () => {
   const { theme } = useTheme();
-  const handleRegister = async(e) => {
-    e.preventDefault();
-    const name = e.target.name.value;
-    const email = e.target.email.value;
-    const password = e.target.password.value;
-    const res=await axios.post('api/auth/register',{name,email,password,role:'user'})
-    alert("success register",)
-    console.log('this is res',res);
-    toast.success("user registered successfully")
+  // const handleRegister = async(e) => {
+
+  //   e.preventDefault();
+  //   const name = e.target.name.value;
+  //   const email = e.target.email.value;
+  //   const password = e.target.password.value;
+  //   const res=await axios.post('api/auth/register',{name,email,password,role:'user'})
+  //   alert("success register",)
+  //   console.log('this is res',res);
+  //   toast.success("user registered successfully")
     
-  };
+    
+  // };
+
+
+  const handleRegister = async (e) => {
+  e.preventDefault();
+  const name = e.target.name.value;
+  const email = e.target.email.value;
+  const password = e.target.password.value;
+
+  // const res=await axios.post('api/auth/register',{name,email,password,role:'user'})
+  // alert("success register",)
+  // console.log('this is res',res);
+  // toast.success("user registered successfully")
+
+  try {
+    
+    const res = await axios.post("/api/auth/register", {
+      name,
+      email,
+      password,
+      role: "user",
+    });
+
+    if (res.status === 200) {
+      // Show success toast
+      toast.success("User registered successfully");
+
+      // Automatically login after registration
+      await signIn("credentials", {
+        email,
+        password,
+        callbackUrl: "/", // redirect after login
+      });
+    }
+  } catch (err) {
+    console.error(err);
+    // Show error toast
+    toast.error(err.response?.data?.message || "Something went wrong");
+  }
+};
+
   return (
     <div className="min-h-screen flex">
       {/* Left Side - Image */}
