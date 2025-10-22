@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import { useForm, Controller } from "react-hook-form";
 import Select from "react-select";
 import ImageUpload from "../../layout/ImageUploader/ImageUpload";
+import axios from "axios";
 
 const BikeForm = () => {
   const [brand, setBrand] = useState(null);
@@ -22,27 +23,39 @@ const BikeForm = () => {
     return () => observer.disconnect();
   }, []);
 
-  const brandOptions = [
-    { value: "Yamaha", label: "Yamaha" },
-    { value: "Honda", label: "Honda" },
-    { value: "Suzuki", label: "Suzuki" },
-    { value: "Kawasaki", label: "Kawasaki" },
-  ];
+ const brandOptions = [
+  { value: "yamaha", label: "Yamaha" },
+  { value: "honda", label: "Honda" },
+  { value: "suzuki", label: "Suzuki" },
+  { value: "kawasaki", label: "Kawasaki" },
+  { value: "ducati", label: "Ducati" },
+  { value: "harley-davidson", label: "Harley-Davidson" },
+  { value: "ktm", label: "KTM" },
+  { value: "royal enfield", label: "Royal Enfield" },
+  { value: "hero", label: "Hero" },
+  { value: "bajaj", label: "Bajaj" },
+  { value: "tvs", label: "TVS" },
+];
+
+
 
   const categoryOptions = [
-    { value: "Sports", label: "Sports" },
-    { value: "Cruiser", label: "Cruiser" },
-    { value: "Scooter", label: "Scooter" },
-    { value: "Adventure", label: "Adventure" },
-  ];
+  { value: "sports", label: "Sports" },
+  { value: "cruiser", label: "Cruiser" },
+  { value: "scooter", label: "Scooter" },
+  { value: "adventure", label: "Adventure" },
+  { value: "standard", label: "Standard" },
+  { value: "electric", label: "Electric" },
+];
 
-  const colorOptions = [
-    { value: "Red", label: "Red" },
-    { value: "Blue", label: "Blue" },
-    { value: "Black", label: "Black" },
-    { value: "White", label: "White" },
-    { value: "Green", label: "Green" },
-  ];
+const colorOptions = [
+  { value: "red", label: "Red" },
+  { value: "blue", label: "Blue" },
+  { value: "black", label: "Black" },
+  { value: "white", label: "White" },
+  { value: "green", label: "Green" },
+];
+
 
   const reactSelectStyles = {
     control: (base) => ({
@@ -87,12 +100,22 @@ const BikeForm = () => {
     }),
   };
 
-  const onSubmit = (data) => {
+  const onSubmit = async(data) => {
     data.brand = brand?.value;
     data.category = category?.value;
     data.colors = colors.map((c) => c.value);
     data.image = imageUrl;
-    console.log("✅ Bike Data Submitted:", data);
+    console.log("Bike Data Submitted:", data);
+    // data saving to the db start
+    try{
+      const res=await axios.post('/api/admin/bikes',data)
+      alert("bike added")
+      console.log(res);
+    }
+    catch (error){
+      console.log(error);
+    }
+    // data saving to the db ends
     reset();
     setBrand(null);
     setCategory(null);
