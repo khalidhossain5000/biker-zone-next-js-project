@@ -1,12 +1,17 @@
 "use client";
 import axios from "axios";
 import { Upload, X } from "lucide-react";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
-const ImageUpload = ({onUpload}) => {
+const ImageUpload = ({onUpload,imageUrl}) => {
   const [preview, setPreview] = useState(null);
   const [uploading, setUploading] = useState(false);
 
+  useEffect(()=>{
+    if(!imageUrl){
+      setPreview(null)
+    }
+  },[imageUrl])
   const handleFileChange = async(e) => {
     e.preventDefault();
     const file=e.target.files[0]
@@ -20,7 +25,9 @@ const ImageUpload = ({onUpload}) => {
         if (res.data.success) {
         const imageUrl = res.data.data.url;
         onUpload(imageUrl); 
+        
       }
+      
     }
     catch(error){
         console.log(error,'image upload eror');

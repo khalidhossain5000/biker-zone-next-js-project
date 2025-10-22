@@ -123,6 +123,7 @@ const colorOptions = [
     setImageUrl(null);
   };
 
+  
   return (
     <div className="container mx-auto p-8 bg-white dark:bg-gray-900/60 shadow-lg rounded-2xl mt-10">
       <h2 className="text-3xl font-bold mb-8 text-gray-800 dark:text-gray-100 text-center">
@@ -321,7 +322,7 @@ const colorOptions = [
             <label className="block text-gray-700 dark:text-gray-200 mb-2">
               Bike Image
             </label>
-            <ImageUpload onUpload={(url) => setImageUrl(url)} />
+            <ImageUpload onUpload={(url) => setImageUrl(url)} imageUrl={imageUrl} />
             {imageUrl && (
               <p className="text-[#e76f51] text-sm mt-2">✅ Image uploaded successfully!</p>
             )}
