@@ -32,8 +32,8 @@ export const authOptions = {
         if (!isValid) {
           throw new Error("Invalid password");
         }
-
-        return { id: user._id, name: user.name, email: user.email };
+console.log('this is user info berfore reutn retunr',user);
+        return { id: user._id, name: user.name, email: user.email,role:user.role };
       },
     }),
   ],
@@ -53,6 +53,7 @@ export const authOptions = {
           await usersCollection.insertOne({
             name: user.name,
             email: user.email,
+            role:'user',
             provider: "google",
           });
         }
@@ -62,12 +63,19 @@ export const authOptions = {
     },
 
     async jwt({ token, user }) {
-      if (user) token.user = user;
+       if (user) {
+      token.id = user.id;
+      token.name = user.name;
+      token.email = user.email;
+      token.role = user.role; 
+    }
+      
       return token;
     },
 
     async session({ session, token }) {
       session.user = token.user;
+      
       return session;
     },
   },

@@ -1,5 +1,5 @@
 "use client";
-import { House } from "lucide-react";
+import { House, Motorbike } from "lucide-react";
 import React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -19,9 +19,9 @@ const DashboardSidebar = () => {
       icon: <House className="w-5 h-5" />,
     },
     {
-      name: "Analytics",
-      path: "/dashboard/analytics",
-      icon: <House className="w-5 h-5" />,
+      name: "Add Bike",
+      path: "/dashboard/add-bike",
+      icon: <Motorbike className="w-5 h-5" />,
     },
     {
       name: "Reports",
@@ -60,7 +60,7 @@ const DashboardSidebar = () => {
                   className={`flex items-center gap-3 px-4 py-3 rounded-lg transition-colors ${
                     isActive
                       ? "bg-[#004e66] dark:bg-[#0a8cb4] text-white font-semibold"
-                      : "hover:bg-gray-800 text-black"
+                      : "hover:bg-gray-800 text-black hover:text-white dark:hover:text-white "
                   }`}
                 >
                   {route.icon}
