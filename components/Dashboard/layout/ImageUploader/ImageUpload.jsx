@@ -36,10 +36,10 @@ const ImageUpload = ({onUpload}) => {
 
   }
   return (
-    <div className="w-full flex flex-col items-center justify-center gap-3">
+    <div className="w-full flex flex-col    gap-3  h-full">
       {!preview ? (
-        <label className="w-40 h-40 border-2 border-dashed border-gray-500 rounded-xl flex flex-col items-center justify-center cursor-pointer hover:border-blue-500 transition">
-          <Upload className="w-10 h-10 text-gray-400" />
+        <label className="py-6 h-9/12 xl:py-0 container border-2 border-dashed border-gray-500 rounded-xl flex flex-col items-center justify-center cursor-pointer hover:border-blue-500 transition dark:text-white">
+          <Upload className="w-10 h-10 text-gray-400 dark:text-white" />
           <p className="text-sm text-gray-400 mt-2">
             {uploading ? "Uploading..." : "Upload Image"}
           </p>
@@ -47,7 +47,7 @@ const ImageUpload = ({onUpload}) => {
             type="file"
             accept="image/*"
             onChange={handleFileChange}
-            className="hidden"
+            className="hidden "
           />
         </label>
       ) : (

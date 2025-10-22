@@ -31,8 +31,8 @@ const DashboardSidebar = () => {
   ];
 
   return (
-    <div>
-      <aside className="hidden lg:flex lg:flex-col lg:h-screen bg-[#ffffff] dark:bg-[#25b3d8] text-white justify-between px-3 py-5 ">
+    <div className="sticky top-0">
+      <aside className="hidden lg:flex lg:flex-col lg:min-h-screen bg-[#ffffff] dark:bg-[#25b3d8] text-white justify-between px-3 py-5 ">
         <div>
           {/* logo  */}
           <div className="logoh mb-12">
