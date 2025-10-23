@@ -1,5 +1,5 @@
 "use client";
-import { House, Motorbike } from "lucide-react";
+import { Bike, House, Motorbike } from "lucide-react";
 import React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -27,6 +27,11 @@ const DashboardSidebar = () => {
       name: "All Users",
       path: "/dashboard/all-users",
       icon: <House className="w-5 h-5" />,
+    },
+    {
+      name: "All Bikes",
+      path: "/dashboard/all-bikes",
+      icon: <Bike className="w-5 h-5" />,
     },
   ];
 

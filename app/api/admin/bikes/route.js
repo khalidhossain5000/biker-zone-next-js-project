@@ -12,3 +12,18 @@ export async function POST(req) {
     return NextResponse.json({ message: "Bike Adds Error" }, error);
   }
 }
+
+//get all bikes
+export async function GET() {
+  try {
+    const bikesCollections = await getBikesCollection();
+    const allBikes = await bikesCollections.find().toArray();
+    return NextResponse.json({
+      message: "All bikes data from db given",
+      allBikes,
+    });
+  } catch (error) {
+    console.log("add bike error", error);
+    return NextResponse.json({ message: "Bike Adds Error" }, error);
+  }
+}
