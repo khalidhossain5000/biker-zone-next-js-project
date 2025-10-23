@@ -1,9 +1,10 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import { useForm, Controller } from "react-hook-form";
-import Select from "react-select";
+const Select = dynamic(() => import("react-select"), { ssr: false });
 import ImageUpload from "../../layout/ImageUploader/ImageUpload";
 import axios from "axios";
+import dynamic from "next/dynamic";
 
 const BikeForm = () => {
   const [brand, setBrand] = useState(null);
