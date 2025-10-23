@@ -2,7 +2,7 @@ import NextAuth from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
 import CredentialsProvider from "next-auth/providers/credentials";
 
-import { compare, hash } from "bcryptjs"; 
+import { compare, hash } from "bcryptjs";
 import { getUsersCollection } from "@/lib/dbcollections";
 
 export const authOptions = {
@@ -22,7 +22,9 @@ export const authOptions = {
       },
       async authorize(credentials) {
         const usersCollection = await getUsersCollection();
-        const user = await usersCollection.findOne({ email: credentials.email });
+        const user = await usersCollection.findOne({
+          email: credentials.email,
+        });
 
         if (!user) {
           throw new Error("No user found with this email");
@@ -32,8 +34,13 @@ export const authOptions = {
         if (!isValid) {
           throw new Error("Invalid password");
         }
-console.log('this is user info berfore reutn retunr',user);
-        return { id: user._id, name: user.name, email: user.email,role:user.role };
+        console.log("this is user info berfore reutn retunr", user);
+        return {
+          id: user._id,
+          name: user.name,
+          email: user.email,
+          role: user.role,
+        };
       },
     }),
   ],
@@ -48,12 +55,14 @@ console.log('this is user info berfore reutn retunr',user);
 
       // If Google user signs in first time — save them
       if (account.provider === "google") {
-        const existingUser = await usersCollection.findOne({ email: user.email });
+        const existingUser = await usersCollection.findOne({
+          email: user.email,
+        });
         if (!existingUser) {
           await usersCollection.insertOne({
             name: user.name,
             email: user.email,
-            role:'user',
+            role: "user",
             provider: "google",
           });
         }
@@ -63,19 +72,23 @@ console.log('this is user info berfore reutn retunr',user);
     },
 
     async jwt({ token, user }) {
-       if (user) {
-      token.id = user.id;
-      token.name = user.name;
-      token.email = user.email;
-      token.role = user.role; 
-    }
-      
+      if (user) {
+        token.id = user.id;
+        token.name = user.name;
+        token.email = user.email;
+        token.role = user.role;
+      }
+
       return token;
     },
 
     async session({ session, token }) {
-      session.user = token.user;
-      
+      session.user = {
+        id: token.id,
+        name: token.name,
+        email: token.email,
+        role: token.role,
+      };
       return session;
     },
   },

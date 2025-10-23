@@ -9,8 +9,6 @@ import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import Image from "next/image";
@@ -20,7 +18,7 @@ const NavItem = () => {
   if (status === "loading") {
     return <p className="text-gray-500">Loading user info...</p>;
   }
-
+console.log(session,'this is session from navbar');
   return (
     <div className="flex items-center gap-12">
       {/* menu-items */}
