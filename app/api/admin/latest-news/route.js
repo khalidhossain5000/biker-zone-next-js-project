@@ -7,3 +7,28 @@ export async function POST(req){
     const result=await newsCollection.insertOne(newsData)
     return NextResponse.json({message:'news added successfully',result})
 }
+
+
+
+export async function GET() {
+  try {
+    const newsCollection = await getLatestNewsCollection();
+
+    // Sort by  descending to get latest first
+    const latestNews = await newsCollection
+      .find({})
+      .sort({ _id: -1 })
+      .toArray();
+
+    return NextResponse.json({
+      message: "Latest news fetched successfully",
+      data: latestNews,
+    });
+  } catch (error) {
+    console.error("Error fetching news:", error);
+    return NextResponse.json(
+      { message: "Failed to fetch news" },
+      { status: 500 }
+    );
+  }
+}

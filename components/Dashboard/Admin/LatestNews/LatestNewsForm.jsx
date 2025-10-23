@@ -4,9 +4,10 @@ import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import ImageUpload from "../../layout/ImageUploader/ImageUpload";
 import axios from "axios";
+import { Button } from "@/components/ui/button";
 
 const LatestNewsForm = () => {
-    const [imageUrl, setImageUrl] = useState(null);
+  const [imageUrl, setImageUrl] = useState(null);
   const {
     register,
     handleSubmit,
@@ -14,17 +15,17 @@ const LatestNewsForm = () => {
     formState: { errors },
   } = useForm();
 
-  const onSubmit = async(data) => {
-    const newsData={
+  const onSubmit = async (data) => {
+    const newsData = {
       ...data,
-      coverImage:imageUrl
-    }
+      coverImage: imageUrl,
+    };
     console.log("News Data:", newsData);
-    const res=await axios.post('/api/admin/latest-news',newsData)
-    console.log('this is res',res);
+    const res = await axios.post("/api/admin/latest-news", newsData);
+    console.log("this is res", res);
     alert("News added successfully!");
     reset();
-    setImageUrl(null)
+    setImageUrl(null);
   };
 
   return (
@@ -54,10 +55,9 @@ const LatestNewsForm = () => {
             Cover Image URL
           </label>
           <ImageUpload
-              onUpload={(url) => setImageUrl(url)}
-              imageUrl={imageUrl}
-            />
-          
+            onUpload={(url) => setImageUrl(url)}
+            imageUrl={imageUrl}
+          />
         </div>
 
         {/* Description */}
@@ -81,55 +81,11 @@ const LatestNewsForm = () => {
         </div>
 
         {/* Category */}
-        <div>
-          <label className="block text-gray-800 dark:text-gray-200 mb-1 font-medium">
-            Category
-          </label>
-          <select
-            {...register("category", { required: "Category is required" })}
-            className="w-full border border-gray-300 dark:border-gray-700 bg-transparent rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-          >
-            <option value="">Select category</option>
-            <option value="Technology">Technology</option>
-            <option value="Sports">Sports</option>
-            <option value="Business">Business</option>
-            <option value="Entertainment">Entertainment</option>
-            <option value="Politics">Politics</option>
-          </select>
-          {errors.category && (
-            <p className="text-red-500 text-sm mt-1">
-              {errors.category.message}
-            </p>
-          )}
-        </div>
-
-        {/* Read More URL */}
-        <div>
-          <label className="block text-gray-800 dark:text-gray-200 mb-1 font-medium">
-            Read More URL
-          </label>
-          <input
-            type="url"
-            placeholder="https://example.com/read-more"
-            {...register("readMore", {
-              required: "Read More URL is required",
-            })}
-            className="w-full border border-gray-300 dark:border-gray-700 bg-transparent rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-          />
-          {errors.readMore && (
-            <p className="text-red-500 text-sm mt-1">
-              {errors.readMore.message}
-            </p>
-          )}
-        </div>
 
         {/* Submit Button */}
-        <button
-          type="submit"
-          className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg py-2 transition duration-200"
-        >
+        <Button type="submit" className={`cursor-pointer lg:w-full`}>
           Add News
-        </button>
+        </Button>
       </form>
     </div>
   );
