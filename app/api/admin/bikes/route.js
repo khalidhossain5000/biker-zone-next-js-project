@@ -1,4 +1,5 @@
 import { getBikesCollection } from "@/lib/dbcollections";
+import { ObjectId } from "mongodb";
 import { NextResponse } from "next/server";
 
 export async function POST(req) {
@@ -22,6 +23,20 @@ export async function GET() {
       message: "All bikes data from db given",
       allBikes,
     });
+  } catch (error) {
+    console.log("add bike error", error);
+    return NextResponse.json({ message: "Bike Adds Error" }, error);
+  }
+}
+
+//delete bike
+export async function DELETE(req) {
+  try {
+    const bikesCollections = await getBikesCollection();
+    const {searchParams}=new URL(req.url)
+    const bikeId=searchParams.get('id')
+    const result=await bikesCollections.deleteOne({_id: new ObjectId(bikeId)})
+    return NextResponse.json({ success: true, result });
   } catch (error) {
     console.log("add bike error", error);
     return NextResponse.json({ message: "Bike Adds Error" }, error);

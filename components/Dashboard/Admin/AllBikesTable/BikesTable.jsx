@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React from "react";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import {
@@ -14,10 +14,16 @@ import {
 import toast from "react-hot-toast";
 import Swal from "sweetalert2";
 import { Trash } from "lucide-react";
-import ViewDescriptions from "./ViewDescriptions";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
 
 const BikesTable = () => {
-    const [isModalOpen, setIsModalOpen] = useState(false);
   // Fetch data
   const {
     data: AllBikes = [],
@@ -37,7 +43,8 @@ const BikesTable = () => {
   //admin actions functionality starts here
   console.log(AllBikes);
 
-  const handleDeleteAdmin = async (bikeId) => {
+  const handleDeleteBike = async (bikeId) => {
+    console.log('this is bikeId',bikeId);
     Swal.fire({
       title: "Are you sure?",
       text: "You are about to delete this bike permanently!",
@@ -57,7 +64,8 @@ const BikesTable = () => {
               "bike has been deleted successfully.",
               "success"
             );
-            refetch();
+            refetch()
+            console.log(res);
           }
         } catch (error) {
           console.error("Error deleting bike:", error);
@@ -66,7 +74,6 @@ const BikesTable = () => {
       }
     });
   };
-  
 
   return (
     <div className="container mx-auto overflow-x-auto w-full p-6 mt-6 bg-white dark:bg-gray-900 rounded-lg">
@@ -116,35 +123,38 @@ const BikesTable = () => {
               <TableCell>{bike.quantity}</TableCell>
               <TableCell>{bike.mileage}</TableCell>
               <TableCell>
-                <button
-        className="bg-blue-500 hover:bg-blue-600 text-white px-3 py-1 rounded"
-        onClick={() => setIsModalOpen(true)}
-      >
-        View Description
-      </button>
-       <ViewDescriptions
-        description={bike.description}
-        isOpen={isModalOpen}
-        setIsOpen={setIsModalOpen}
-      />
-      
+                <Dialog>
+                  <DialogTrigger asChild>
+                    <button
+                      className="bg-blue-500 hover:bg-blue-600 text-white px-3 py-1 cursor-pointer rounded"
+                      onClick={() => setIsModalOpen(true)}
+                    >
+                      View Description
+                    </button>
+                  </DialogTrigger>
+                  <DialogContent className="md:max-w-lg xl:max-w-xl">
+                    <DialogHeader>
+                      <DialogTitle>Bike Description</DialogTitle>
+                    </DialogHeader>
+                    <DialogDescription className="">
+                      {bike.description}
+                    </DialogDescription>
+                  </DialogContent>
+                </Dialog>
               </TableCell>
               <TableCell className="flex gap-2">
                 <button
                   title="Click to delete"
-                  onClick={() => handleDeleteAdmin(bike._id)}
+                  onClick={() => handleDeleteBike(bike._id)}
                   className="px-3 py-1 cursor-pointer bg-red-500 text-white rounded hover:bg-red-600 transition"
                 >
                   <Trash />
                 </button>
               </TableCell>
-              
             </TableRow>
-            
           ))}
         </TableBody>
       </Table>
-     
     </div>
   );
 };
