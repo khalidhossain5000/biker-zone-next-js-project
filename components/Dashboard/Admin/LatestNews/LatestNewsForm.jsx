@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import ImageUpload from "../../layout/ImageUploader/ImageUpload";
+import axios from "axios";
 
 const LatestNewsForm = () => {
     const [imageUrl, setImageUrl] = useState(null);
@@ -13,14 +14,17 @@ const LatestNewsForm = () => {
     formState: { errors },
   } = useForm();
 
-  const onSubmit = (data) => {
+  const onSubmit = async(data) => {
     const newsData={
       ...data,
       coverImage:imageUrl
     }
     console.log("News Data:", newsData);
+    const res=await axios.post('/api/admin/latest-news',newsData)
+    console.log('this is res',res);
     alert("News added successfully!");
     reset();
+    setImageUrl(null)
   };
 
   return (
