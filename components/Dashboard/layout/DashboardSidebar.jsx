@@ -1,5 +1,5 @@
 "use client";
-import { Bike, House, Motorbike, Newspaper } from "lucide-react";
+import { BadgePlus, Bike, House, Motorbike, Newspaper } from "lucide-react";
 import React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -35,7 +35,12 @@ const DashboardSidebar = () => {
     },
     {
       name: "Add Latest News",
-      path: "/dashboard/latest-news",
+      path: "/dashboard/add-latest-news",
+      icon: <BadgePlus   className="w-5 h-5" />,
+    },
+    {
+      name: "Add Latest News",
+      path: "/dashboard/all-latest-news",
       icon: <Newspaper  className="w-5 h-5" />,
     },
   ];
