@@ -24,8 +24,8 @@ const DashboardSidebar = () => {
       icon: <Motorbike className="w-5 h-5" />,
     },
     {
-      name: "Reports",
-      path: "/dashboard/reports",
+      name: "All Users",
+      path: "/dashboard/all-users",
       icon: <House className="w-5 h-5" />,
     },
   ];

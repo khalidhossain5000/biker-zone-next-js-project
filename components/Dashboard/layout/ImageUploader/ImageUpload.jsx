@@ -3,45 +3,43 @@ import axios from "axios";
 import { Upload, X } from "lucide-react";
 import React, { useEffect, useState } from "react";
 
-const ImageUpload = ({onUpload,imageUrl}) => {
+const ImageUpload = ({ onUpload, imageUrl }) => {
   const [preview, setPreview] = useState(null);
   const [uploading, setUploading] = useState(false);
 
-  useEffect(()=>{
-    if(!imageUrl){
-      setPreview(null)
+  useEffect(() => {
+    if (!imageUrl) {
+      setPreview(null);
     }
-  },[imageUrl])
-  const handleFileChange = async(e) => {
+  }, [imageUrl]);
+  const handleFileChange = async (e) => {
     e.preventDefault();
-    const file=e.target.files[0]
-    if(!file) return
-    setPreview(URL.createObjectURL(file))
-    setUploading(true)
-    const formData=new FormData()
+    const file = e.target.files[0];
+    if (!file) return;
+    setPreview(URL.createObjectURL(file));
+    setUploading(true);
+    const formData = new FormData();
     formData.append("image", file);
-    try{
-        const res=await axios.post(`https://api.imgbb.com/1/upload?key=${process.env.NEXT_PUBLIC_IMGBB_KEY}`,formData)
-        if (res.data.success) {
+    try {
+      const res = await axios.post(
+        `https://api.imgbb.com/1/upload?key=${process.env.NEXT_PUBLIC_IMGBB_KEY}`,
+        formData
+      );
+      if (res.data.success) {
         const imageUrl = res.data.data.url;
-        onUpload(imageUrl); 
-        
+        onUpload(imageUrl);
       }
-      
-    }
-    catch(error){
-        console.log(error,'image upload eror');
-    }
-    finally{
-        setUploading(false)
+    } catch (error) {
+      console.log(error, "image upload eror");
+    } finally {
+      setUploading(false);
     }
   };
-  
-  const handleRemove=()=>{
+
+  const handleRemove = () => {
     setPreview(null);
     onUpload("");
-
-  }
+  };
   return (
     <div className="w-full flex flex-col    gap-3  h-full">
       {!preview ? (

@@ -12,50 +12,57 @@ const BikeForm = () => {
   const [imageUrl, setImageUrl] = useState(null);
   const [isDark, setIsDark] = useState(false);
 
-  const { register, handleSubmit, control, reset, formState: { errors } } = useForm();
+  const {
+    register,
+    handleSubmit,
+    control,
+    reset,
+    formState: { errors },
+  } = useForm();
 
   // Detect dark theme dynamically (shadcn uses dark class on <html>)
   useEffect(() => {
-    const checkTheme = () => setIsDark(document.documentElement.classList.contains("dark"));
+    const checkTheme = () =>
+      setIsDark(document.documentElement.classList.contains("dark"));
     checkTheme();
     const observer = new MutationObserver(() => checkTheme());
-    observer.observe(document.documentElement, { attributes: true, attributeFilter: ["class"] });
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ["class"],
+    });
     return () => observer.disconnect();
   }, []);
 
- const brandOptions = [
-  { value: "yamaha", label: "Yamaha" },
-  { value: "honda", label: "Honda" },
-  { value: "suzuki", label: "Suzuki" },
-  { value: "kawasaki", label: "Kawasaki" },
-  { value: "ducati", label: "Ducati" },
-  { value: "harley-davidson", label: "Harley-Davidson" },
-  { value: "ktm", label: "KTM" },
-  { value: "royal enfield", label: "Royal Enfield" },
-  { value: "hero", label: "Hero" },
-  { value: "bajaj", label: "Bajaj" },
-  { value: "tvs", label: "TVS" },
-];
-
-
+  const brandOptions = [
+    { value: "yamaha", label: "Yamaha" },
+    { value: "honda", label: "Honda" },
+    { value: "suzuki", label: "Suzuki" },
+    { value: "kawasaki", label: "Kawasaki" },
+    { value: "ducati", label: "Ducati" },
+    { value: "harley-davidson", label: "Harley-Davidson" },
+    { value: "ktm", label: "KTM" },
+    { value: "royal enfield", label: "Royal Enfield" },
+    { value: "hero", label: "Hero" },
+    { value: "bajaj", label: "Bajaj" },
+    { value: "tvs", label: "TVS" },
+  ];
 
   const categoryOptions = [
-  { value: "sports", label: "Sports" },
-  { value: "cruiser", label: "Cruiser" },
-  { value: "scooter", label: "Scooter" },
-  { value: "adventure", label: "Adventure" },
-  { value: "standard", label: "Standard" },
-  { value: "electric", label: "Electric" },
-];
+    { value: "sports", label: "Sports" },
+    { value: "cruiser", label: "Cruiser" },
+    { value: "scooter", label: "Scooter" },
+    { value: "adventure", label: "Adventure" },
+    { value: "standard", label: "Standard" },
+    { value: "electric", label: "Electric" },
+  ];
 
-const colorOptions = [
-  { value: "red", label: "Red" },
-  { value: "blue", label: "Blue" },
-  { value: "black", label: "Black" },
-  { value: "white", label: "White" },
-  { value: "green", label: "Green" },
-];
-
+  const colorOptions = [
+    { value: "red", label: "Red" },
+    { value: "blue", label: "Blue" },
+    { value: "black", label: "Black" },
+    { value: "white", label: "White" },
+    { value: "green", label: "Green" },
+  ];
 
   const reactSelectStyles = {
     control: (base) => ({
@@ -87,10 +94,14 @@ const colorOptions = [
     option: (base, state) => ({
       ...base,
       backgroundColor: state.isFocused
-        ? isDark ? "#4b5563" : "#f3f4f6"
+        ? isDark
+          ? "#4b5563"
+          : "#f3f4f6"
         : state.isSelected
         ? "#e76f51"
-        : isDark ? "#1f2937" : "white",
+        : isDark
+        ? "#1f2937"
+        : "white",
       color: state.isSelected ? "white" : isDark ? "#f9fafb" : "#111827",
       "&:hover": { backgroundColor: "#e76f51", color: "white" },
     }),
@@ -100,19 +111,19 @@ const colorOptions = [
     }),
   };
 
-  const onSubmit = async(data) => {
+  const onSubmit = async (data) => {
     data.brand = brand?.value;
     data.category = category?.value;
     data.colors = colors.map((c) => c.value);
     data.image = imageUrl;
     console.log("Bike Data Submitted:", data);
     // data saving to the db start
-    try{
-      const res=await axios.post('/api/admin/bikes',data)
-      alert("bike added")
+    try {
+      const res = await axios.post("/api/admin/bikes", data);
+      alert("bike added");
+      
       console.log(res);
-    }
-    catch (error){
+    } catch (error) {
       console.log(error);
     }
     // data saving to the db ends
@@ -123,7 +134,6 @@ const colorOptions = [
     setImageUrl(null);
   };
 
-  
   return (
     <div className="container mx-auto p-8 bg-white dark:bg-gray-900/60 shadow-lg rounded-2xl mt-10">
       <h2 className="text-3xl font-bold mb-8 text-gray-800 dark:text-gray-100 text-center">
@@ -159,7 +169,10 @@ const colorOptions = [
                 <Select
                   {...field}
                   value={category}
-                  onChange={(val) => { field.onChange(val); setCategory(val); }}
+                  onChange={(val) => {
+                    field.onChange(val);
+                    setCategory(val);
+                  }}
                   options={categoryOptions}
                   placeholder="Select category"
                   styles={reactSelectStyles}
@@ -168,7 +181,9 @@ const colorOptions = [
               )}
             />
             {errors.category && (
-              <p className="text-red-500 text-sm mt-1">{errors.category.message}</p>
+              <p className="text-red-500 text-sm mt-1">
+                {errors.category.message}
+              </p>
             )}
           </div>
         </div>
@@ -187,7 +202,10 @@ const colorOptions = [
                 <Select
                   {...field}
                   value={brand}
-                  onChange={(val) => { field.onChange(val); setBrand(val); }}
+                  onChange={(val) => {
+                    field.onChange(val);
+                    setBrand(val);
+                  }}
                   options={brandOptions}
                   placeholder="Select brand"
                   styles={reactSelectStyles}
@@ -196,7 +214,9 @@ const colorOptions = [
               )}
             />
             {errors.brand && (
-              <p className="text-red-500 text-sm mt-1">{errors.brand.message}</p>
+              <p className="text-red-500 text-sm mt-1">
+                {errors.brand.message}
+              </p>
             )}
           </div>
 
@@ -322,9 +342,14 @@ const colorOptions = [
             <label className="block text-gray-700 dark:text-gray-200 mb-2">
               Bike Image
             </label>
-            <ImageUpload onUpload={(url) => setImageUrl(url)} imageUrl={imageUrl} />
+            <ImageUpload
+              onUpload={(url) => setImageUrl(url)}
+              imageUrl={imageUrl}
+            />
             {imageUrl && (
-              <p className="text-[#e76f51] text-sm mt-2">✅ Image uploaded successfully!</p>
+              <p className="text-[#e76f51] text-sm mt-2">
+                Image uploaded successfully!
+              </p>
             )}
           </div>
         </div>
