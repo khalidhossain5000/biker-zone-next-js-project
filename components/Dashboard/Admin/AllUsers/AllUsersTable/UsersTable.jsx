@@ -19,6 +19,7 @@ const UsersTable = () => {
     data: AllUsers = [],
     isLoading,
     error,
+    refetch
   } = useQuery({
     queryKey: ["all-users"],
     queryFn: async () => {
@@ -33,11 +34,24 @@ const UsersTable = () => {
 
 const handleMakeAdmin = async (userId) => {
   try {
-    const res = await axios.patch(`/api/admin/users/?id=${userId}`);
-    console.log(res);
-    toast.success("Admin make succesffully")
+    const res = await axios.patch(`/api/admin/users?id=${userId}&action=make`);
+    console.log(res.data);
+    refetch()
+    toast.success("User promoted to Admin successfully!");
   } catch (error) {
     console.error("Error promoting user:", error);
+    toast.error("Failed to make admin!");
+  }
+};
+const handleRemoveAdmin = async (userId) => {
+  try {
+    const res = await axios.patch(`/api/admin/users?id=${userId}&action=remove`);
+    console.log(res.data);
+    refetch()
+    toast.success("Admin removed successfully!");
+  } catch (error) {
+    console.error("Error removing admin:", error);
+    toast.error("Failed to remove admin!");
   }
 };
   return (
@@ -73,7 +87,7 @@ const handleMakeAdmin = async (userId) => {
   <button onClick={()=>handleMakeAdmin(user._id)} className="px-3 py-1 bg-green-500 text-white rounded hover:bg-green-600 transition">
     Make Admin
   </button>
-  <button className="px-3 py-1 bg-blue-500 text-white rounded hover:bg-blue-600 transition">
+  <button onClick={() => handleRemoveAdmin(user._id)} className="px-3 py-1 bg-blue-500 text-white rounded hover:bg-blue-600 transition">
     Remove Admin
   </button>
 </TableCell>
