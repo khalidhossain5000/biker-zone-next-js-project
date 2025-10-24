@@ -1,4 +1,5 @@
 import { getLatestNewsCollection } from "@/lib/dbcollections";
+import { ObjectId } from "mongodb";
 import { NextResponse } from "next/server";
 
 export async function POST(req){
@@ -35,5 +36,10 @@ export async function GET() {
 
 //delete api
 export async function DELETE(req){
+ const newsCollection = await getLatestNewsCollection();
+  const {searchParams}=new URL(req.url)
   
+  const id=searchParams.get("id")
+  const result=await newsCollection.deleteOne({_id:new ObjectId(id)})
+  return NextResponse.json({message:'Delete success',result})
 }

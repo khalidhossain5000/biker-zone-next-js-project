@@ -53,10 +53,11 @@ const LatestNewsTable = () => {
       confirmButtonText: "Yes, delete it!",
     }).then(async (result) => {
       if (result.isConfirmed) {
+        
         try {
-          const res = await axios.delete(`/api/admin/newss?id=${newsId}`);
+          const res = await axios.delete(`/api/admin/latest-news?id=${newsId}`);
 
-          if (res.data.success) {
+          if (res.data.result.acknowledged) {
             Swal.fire(
               "Deleted!",
               "news has been deleted successfully.",
