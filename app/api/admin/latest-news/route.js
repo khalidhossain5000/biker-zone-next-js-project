@@ -32,3 +32,8 @@ export async function GET() {
     );
   }
 }
+
+//delete api
+export async function DELETE(req){
+  
+}
