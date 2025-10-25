@@ -62,6 +62,18 @@ console.log(session,'this is from navitem');
           </li>
           <li>
             <Link
+              href={"/all-bikes"}
+              className={
+                pathname === "/news"
+                  ? "text-blue-500 font-bold"
+                  : "text-gray-700 dark:text-white"
+              }
+            >
+              All Bikes
+            </Link>
+          </li>
+          <li>
+            <Link
               href={"/contact"}
               className={
                 pathname === "/contact"
