@@ -245,6 +245,7 @@ const BikeForm = () => {
             <input
               {...register("engine", { required: true })}
               placeholder="e.g. 150cc"
+              type="number"
               className="w-full p-3 border rounded-lg border-gray-300 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-100 focus:outline-none focus:ring-1 focus:ring-[#e76f51] focus:border-[#e76f51]"
             />
             {errors.engine && (
@@ -258,6 +259,7 @@ const BikeForm = () => {
             </label>
             <input
               {...register("mileage")}
+              type="number"
               placeholder="e.g. 45 km/l"
               className="w-full p-3 border rounded-lg border-gray-300 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-100 focus:outline-none focus:ring-1 focus:ring-[#e76f51] focus:border-[#e76f51]"
             />

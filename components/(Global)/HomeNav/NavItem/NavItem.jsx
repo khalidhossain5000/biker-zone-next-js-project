@@ -2,7 +2,6 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import React from "react";
-import { ModeToggle } from "../../Theme/ThemeToggle";
 import { Button } from "@/components/ui/button";
 import { signOut, useSession } from "next-auth/react";
 import {
@@ -13,6 +12,8 @@ import {
 } from "@/components/ui/dropdown-menu";
 import Image from "next/image";
 import { ShoppingCart } from "lucide-react";
+import { useCart } from "@/app/ContextApi/CartContext";
+import { ModeToggle } from "../../Theme/ThemeToggle";
 const NavItem = () => {
   const pathname = usePathname();
   const { data: session, status } = useSession();
@@ -20,6 +21,7 @@ const NavItem = () => {
     return <p className="text-gray-500">Loading user info...</p>;
   }
 console.log(session,'this is from navitem');
+const {cartCount}=useCart()
   return (
     <div className="flex items-center gap-12">
       {/* menu-items */}
@@ -76,7 +78,7 @@ console.log(session,'this is from navitem');
           </li>
 
           {/* cart icon and cart page redirect here */}
-           <li>
+           <li className="relative">
             <Link
               href={"/carts"}
               className={
@@ -86,6 +88,12 @@ console.log(session,'this is from navitem');
               }
             >
               <ShoppingCart />
+               {/* Cart count badge */}
+        {cartCount > 0 && (
+          <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs w-5 h-5 rounded-full flex items-center justify-center">
+            {cartCount}
+          </span>
+        )}
             </Link>
           </li>
         </ul>
