@@ -77,8 +77,15 @@ export const authOptions = {
         token.name = user.name;
         token.email = user.email;
         token.role = user.role;
-      }
-
+      }else {
+    // user না থাকলে (যেমন refresh বা session fetch), DB থেকে role নিয়ে আসো
+    const usersCollection = await getUsersCollection();
+    const existingUser = await usersCollection.findOne({ email: token.email });
+    if (existingUser) {
+      token.role = existingUser.role; // ✅ এখন role token এ যোগ হবে
+    }
+  }
+console.log(token,user,'this is user and token here');
       return token;
     },
 

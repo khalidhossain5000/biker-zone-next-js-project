@@ -18,7 +18,7 @@ const NavItem = () => {
   if (status === "loading") {
     return <p className="text-gray-500">Loading user info...</p>;
   }
-console.log(session,'this is session from navbar');
+console.log(session,'this is from navitem');
   return (
     <div className="flex items-center gap-12">
       {/* menu-items */}
@@ -83,8 +83,7 @@ console.log(session,'this is session from navbar');
             <DropdownMenuTrigger>
               <Image
                 src={
-                  session.user.image ||
-                  "https://i.ibb.co/zVB99J4d/DEFAULT.jpg"
+                  session.user.image || "https://i.ibb.co/zVB99J4d/DEFAULT.jpg"
                 }
                 alt="user profile image here added"
                 width={50}
@@ -96,19 +95,19 @@ console.log(session,'this is session from navbar');
               <DropdownMenuItem>
                 <div className="flex justify-center mb-3">
                   <h2 className="text-xl font-bold text-black">
-                   Email: {session?.user.email}
+                    Email: {session?.user.email}
                   </h2>
                 </div>
               </DropdownMenuItem>
               <DropdownMenuItem className="w-fit text-center px-8 py-1 border-[#8fda20] border-4 font-bold text-base text-[#8fda20] rounded-full bg-black dark:hover:bg-white dark:hover:text-black cursor-pointer">
-                      <Link href="/dashboard">Dashboard</Link>
-                    </DropdownMenuItem>
-                    <DropdownMenuItem
-                      className="text-lg px-12 py-1 bg-red-500 text-white rounded hover:bg-red-600 transition my-2 font-semibold cursor-pointer text-center"
-                      onClick={() => signOut({ callbackUrl: "/" })}
-                    >
-                      Logout
-                    </DropdownMenuItem>
+                <Link href="/dashboard">Dashboard</Link>
+              </DropdownMenuItem>
+              <DropdownMenuItem
+                className="text-lg px-12 py-1 bg-red-500 text-white rounded hover:bg-red-600 transition my-2 font-semibold cursor-pointer text-center"
+                onClick={() => signOut({ callbackUrl: "/" })}
+              >
+                Logout
+              </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
         )}
@@ -120,7 +119,6 @@ console.log(session,'this is session from navbar');
           </Link>
         )}
       </div>
-      
     </div>
   );
 };

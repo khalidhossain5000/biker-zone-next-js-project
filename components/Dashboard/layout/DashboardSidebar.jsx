@@ -4,13 +4,14 @@ import React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { ModeToggle } from "@/components/(Global)/Theme/ThemeToggle";
-import { signOut } from "next-auth/react";
+import { signOut, useSession } from "next-auth/react";
 import ResponsiveSidebarMenu from "./ResponsiveSidebarMenu";
 import logo from "../../../assets/logo/logo-go.png";
 import darklogo from "../../../assets/logo/dark-logo.png";
 import Image from "next/image";
 const DashboardSidebar = () => {
   const pathname = usePathname();
+  const { data: session } = useSession();
 
   const sidebarRoutes = [
     {
