@@ -12,6 +12,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import Image from "next/image";
+import { ShoppingCart } from "lucide-react";
 const NavItem = () => {
   const pathname = usePathname();
   const { data: session, status } = useSession();
@@ -60,18 +61,7 @@ console.log(session,'this is from navitem');
               News
             </Link>
           </li>
-          <li>
-            <Link
-              href={"/all-bikes"}
-              className={
-                pathname === "/news"
-                  ? "text-blue-500 font-bold"
-                  : "text-gray-700 dark:text-white"
-              }
-            >
-              All Bikes
-            </Link>
-          </li>
+          
           <li>
             <Link
               href={"/contact"}
@@ -82,6 +72,20 @@ console.log(session,'this is from navitem');
               }
             >
               Contact
+            </Link>
+          </li>
+
+          {/* cart icon and cart page redirect here */}
+           <li>
+            <Link
+              href={"/carts"}
+              className={
+                pathname === "/carts"
+                  ? "text-blue-500 font-bold"
+                  : "text-gray-700 dark:text-white"
+              }
+            >
+              <ShoppingCart />
             </Link>
           </li>
         </ul>

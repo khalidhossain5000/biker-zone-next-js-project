@@ -170,7 +170,7 @@ const AllBikesCard = () => {
             </div>
             <div className="text-center">
               <Link
-                href={`/all-bikes/${bike._id}`}
+                href={`/shop/${bike._id}`}
                 className="w-9/12 mx-auto bg-primary hover:bg-primary-dark text-white font-semibold py-2 px-4 rounded-lg transition"
               >
                 Details
