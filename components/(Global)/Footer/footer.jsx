@@ -64,7 +64,7 @@ const Footer = () => {
           <h3 className="text-sm text-white font-medium">Get the App</h3>
           <div className="">
             {/* Replace these with your actual image paths */}
-            <Link href="#">
+           
               <Image
                 src={play}
                 alt="Download on the App Store"
@@ -72,8 +72,8 @@ const Footer = () => {
                 height={40}
                 className="cursor-pointer hover:opacity-90 transition-opacity py-3"
               />
-            </Link>
-            <Link href="#">
+       
+         
               <Image
                 src={ios}
                 alt="Get it on Google Play"
@@ -81,7 +81,7 @@ const Footer = () => {
                 height={40}
                 className="cursor-pointer hover:opacity-90 transition-opacity"
               />
-            </Link>
+          
           </div>
         </div>
       </div>
