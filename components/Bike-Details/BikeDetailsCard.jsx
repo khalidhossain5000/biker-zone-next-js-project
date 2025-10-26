@@ -9,12 +9,11 @@ import React from "react";
 import toast from "react-hot-toast";
 
 const BikeDetailsCard = ({ bikeId }) => {
-  const {refetch}=useCart()
+  const { refetch } = useCart();
   const {
     data: allBikes = [],
     isLoading,
     error,
-    
   } = useQuery({
     queryKey: ["all-bikes"],
     queryFn: async () => {
@@ -44,7 +43,7 @@ const BikeDetailsCard = ({ bikeId }) => {
       <h2 className="text-red-500 text-center mt-10 text-xl">Bike not found</h2>
     );
   // HANDLE ADD TO CART BUTTON STARTS HERE
-  const handleAddToCart =async (productData) => {
+  const handleAddToCart = async (productData) => {
     console.log(productData, "this is in handleAddToCart Functions");
     const { _id, model, image, price, quantity, isFeatured } = productData;
     const cartData = {
@@ -54,14 +53,13 @@ const BikeDetailsCard = ({ bikeId }) => {
       productPrice: price,
       prodcutQuantity: quantity,
       isFeatured,
-      
     };
     //cart data save to the db starts here
-    const res=await axios.post('/api/carts',cartData)
-    refetch()
-    console.log('this is res',res)
+    const res = await axios.post("/api/carts", cartData);
+    refetch();
+    console.log("this is res", res);
 
-    toast.success("Item added to the cart Successfullyp")
+    toast.success("Item added to the cart Successfullyp");
   };
   return (
     <div className="container mx-auto px-4 mt-10 py-6">
