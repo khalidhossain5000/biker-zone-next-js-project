@@ -37,10 +37,15 @@ export const CartProvider=({children})=>{
         );
    
     const cartCount=cartData.length
+    //total price
+    const totalPrice=cartData.reduce((sum,item)=>{
+      return sum+parseInt(item.productPrice)
+    },0)
     const info={
         cartCount,
         cartData,
-        refetch
+        refetch,
+        totalPrice
     }
     return (
         <CartContext value={info}>

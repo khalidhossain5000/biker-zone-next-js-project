@@ -4,20 +4,14 @@ import React, { useState } from 'react';
 import { X } from 'lucide-react';
 
 const CartCard = () => {
-  const { cartData } = useCart();
-  const [items, setItems] = useState(cartData);
+  const { cartData,totalPrice } = useCart();
 
   // Remove item handler
   const handleRemove = (id) => {
-    const updated = items.filter((item) => item._id !== id);
-    setItems(updated);
+    
   };
 
-  // Calculate total price
-  const totalPrice = items.reduce(
-    (sum, item) => sum + parseInt(item.productPrice || 0),
-    0
-  );
+  
 
   return (
     <div className="container mx-auto  px-4 md:px-10 py-10 transition-colors duration-300">
@@ -25,13 +19,13 @@ const CartCard = () => {
          Your Cart Items
       </h2>
 
-      {items.length === 0 ? (
+      {cartData.length === 0 ? (
         <p className="text-center text-gray-600 dark:text-gray-300 text-lg">
           Your cart is empty
         </p>
       ) : (
         <div className="space-y-5">
-          {items.map((item) => (
+          {cartData.map((item) => (
             <div
               key={item._id}
               className="flex flex-col md:flex-row items-center justify-between bg-white dark:bg-gray-800 shadow-md border border-gray-200 dark:border-gray-700 rounded-2xl p-4 hover:shadow-lg transition-all duration-300"
@@ -73,7 +67,7 @@ const CartCard = () => {
       )}
 
       {/* Total Section */}
-      {items.length > 0 && (
+      {cartData.length > 0 && (
         <div className="mt-10 bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-lg border border-gray-200 dark:border-gray-700 max-w-lg mx-auto text-center">
           <h3 className="text-2xl font-semibold text-gray-800 dark:text-gray-100 mb-3">
             Total:
