@@ -1,4 +1,5 @@
 import { getCartsCollection } from "@/lib/dbcollections";
+import { ObjectId } from "mongodb";
 import { NextResponse } from "next/server";
 
 export async function POST(req) {
@@ -20,4 +21,17 @@ export async function GET(){
     const cartCollection=await getCartsCollection()
     const result=await cartCollection.find().toArray()
     return NextResponse.json({message:'all cart data given',result})
+}
+
+
+
+//dlete cart item from the db
+
+export async function DELETE(req){
+  const cartCollection=await getCartsCollection()
+  const {searchParams}=new URL(req.url)
+  const productId=searchParams.get('id')
+  const result=await cartCollection.deleteOne({_id:new ObjectId(productId)})
+   return NextResponse.json({ success: true, result });
+
 }
