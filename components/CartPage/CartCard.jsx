@@ -1,9 +1,10 @@
 "use client";
 import { useCart } from "@/app/ContextApi/CartContext";
-import React, { useState } from "react";
+import React from "react";
 import { X } from "lucide-react";
 import axios from "axios";
 import toast from "react-hot-toast";
+import Link from "next/link";
 
 const CartCard = () => {
   const { cartData, totalPrice, refetch } = useCart();
@@ -13,7 +14,7 @@ const CartCard = () => {
     const res = await axios.delete(`/api/carts?id=${id}`);
     if (res.data.success) {
       toast.success("Item removed");
-      refetch()
+      refetch();
     }
     console.log("this is res from delte hndle", res);
   };
@@ -80,9 +81,11 @@ const CartCard = () => {
               ৳ {totalPrice}
             </span>
           </h3>
+          <Link href={`checkout`}>
           <button className="bg-[#fa8207] hover:bg-[#e67405] text-white font-semibold px-6 py-3 rounded-xl w-full transition">
             Proceed to Checkout
           </button>
+          </Link>
         </div>
       )}
     </div>
