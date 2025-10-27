@@ -1,6 +1,7 @@
 'use client'
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
+import { useSession } from "next-auth/react";
 
 const { createContext, useContext } = require("react");
 
@@ -9,6 +10,8 @@ const CartContext=createContext()
 
 //context provider
 export const CartProvider=({children})=>{
+  const {data:session}=useSession()
+  console.log(session,'thi sis ession in cartProvider context api');
     // Fetch data
       const {
         data: cartData = [],

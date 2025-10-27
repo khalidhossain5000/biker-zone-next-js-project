@@ -14,8 +14,8 @@ const PaymentsForm = () => {
     Nagad: "Send payment to 01712345678 and enter the transaction ID above.",
     Upay: "Send payment to 01898765432 and enter the transaction ID above.",
   };
-const cartItem={...cartData}
-console.log('this is cartItem',cartItem);
+  const cartItem = { ...cartData };
+  console.log("this is cartItem", cartItem);
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!transactionId) {
@@ -23,7 +23,7 @@ console.log('this is cartItem',cartItem);
       return;
     }
     const paymentData = {
-      paymentItem:[...cartData],
+      paymentItem: [...cartData],
       transactionId,
       paymentMethod,
     };
