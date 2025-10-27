@@ -7,7 +7,7 @@ import Swal from "sweetalert2";
 const PaymentsForm = () => {
   const [paymentMethod, setPaymentMethod] = useState("bKash");
   const [transactionId, setTransactionId] = useState("");
-  const { finalCartData, totalPrice,userCartEmail } = useCart();
+  const { finalCartData, totalPrice,userCartEmail,handleClearUserCart } = useCart();
   const guidelines = {
     bKash: "Send payment to 01634933390 and enter the transaction ID above.",
     Rocket: "Send payment to 01934933399 and enter the transaction ID above.",
@@ -38,6 +38,7 @@ const PaymentsForm = () => {
         confirmButtonColor: "#fa8207",
       });
     }
+    handleClearUserCart()
     console.log(res, "this is payemtn success res");
     setTransactionId("");
   };
