@@ -4,7 +4,7 @@ import { useSession } from "next-auth/react";
 import Image from "next/image";
 const LogoAndInfo = () => {
   const { data: session } = useSession();
-  console.log(session, "ftom logo and info here");
+  
   return (
     <div className="hidden lg:flex justify-between items-center px-6 py-6 bg-white dark:bg-gray-900 shadow-sm shadow-blue-200">
       <div className="logoh">

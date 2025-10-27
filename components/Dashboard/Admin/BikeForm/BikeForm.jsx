@@ -341,7 +341,7 @@ const BikeForm = () => {
             />
           </div>
 
-          <div>
+           <div>
             <label className="block text-gray-700 dark:text-gray-200 mb-2">
               Bike Image
             </label>

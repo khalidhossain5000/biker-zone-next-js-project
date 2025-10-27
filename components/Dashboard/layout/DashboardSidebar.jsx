@@ -1,5 +1,5 @@
 "use client";
-import { BadgePlus, Bike, House, Motorbike, Newspaper, Package } from "lucide-react";
+import { BadgePlus, Bike, House, Motorbike, Newspaper, Package, UserRoundPen } from "lucide-react";
 import React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -51,6 +51,11 @@ if(role==='admin'){
       path: "/dashboard/all-orders",
       icon: <Package  className="w-5 h-5" />,
     },
+     {
+      name: "Update Profile",
+      path: "/dashboard/update-profile",
+      icon: <UserRoundPen  className="w-5 h-5" />,
+    },
   ];
 }
   // user route starts here
@@ -78,8 +83,8 @@ if(role==='admin'){
     },
     {
       name: "Update Profile",
-      path: "/dashboard/all-latest-news",
-      icon: <Newspaper  className="w-5 h-5" />,
+      path: "/dashboard/update-profile",
+      icon: <UserRoundPen  className="w-5 h-5" />,
     },
   ];
   }

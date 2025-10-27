@@ -13,20 +13,20 @@ const CartContext = createContext();
 export const CartProvider = ({ children }) => {
   const { data: session, status } = useSession();
 
-  // Fetch data
-  const {
-    data: cartData = [],
-    isLoading,
-    error,
-    refetch,
-  } = useQuery({
-    queryKey: ["all-carts"],
-    queryFn: async () => {
-      const res = await axios.get(`/api/carts?email=${session?.user?.email}`);
-      return res.data.result;
-    },
-    enabled: !!session?.user?.email,
-  });
+    // Fetch data
+    const {
+      data: cartData = [],
+      isLoading,
+      error,
+      refetch,
+    } = useQuery({
+      queryKey: ["all-carts"],
+      queryFn: async () => {
+        const res = await axios.get(`/api/carts?email=${session?.user?.email}`);
+        return res.data.result;
+      },
+      enabled: !!session?.user?.email,
+    });
 
   if (isLoading || status !== "authenticated")
     return (
@@ -48,46 +48,35 @@ export const CartProvider = ({ children }) => {
     );
 
   const cartCount = cartData?.cartItems?.length;
-  const finalCartData=cartData?.cartItems;
-  const userCartEmail=cartData?.userEmail
+  const finalCartData = cartData?.cartItems;
+  const userCartEmail = cartData?.userEmail;
   //total price
   const totalPrice = cartData?.cartItems?.reduce((sum, item) => {
     return sum + parseInt(item.productPrice);
   }, 0);
 
-
-//clear cart after the user make payment
-
+  //clear cart after the user make payment
 
   const handleClearUserCart = async () => {
-  try {
-  
-    const res = await axios.delete(
-      `/api/admin/clear-cart?email=${userCartEmail}`
-    );
+    try {
+      const res = await axios.delete(
+        `/api/admin/clear-cart?email=${userCartEmail}`
+      );
 
-    if (res.data.success) {
-      toast.success("Item removed");
-      console.log(res,'this is res in handleclearcart user ucar');
-      refetch(); // cart update
-    } else {
-      toast.error("Failed to remove item");
+      if (res.data.success) {
+        toast.success("Item removed");
+        console.log(res, "this is res in handleclearcart user ucar");
+        refetch(); // cart update
+      } else {
+        toast.error("Failed to remove item");
+      }
+
+      console.log("Deleted item response:", res);
+    } catch (error) {
+      console.error("Error removing cart item:", error);
+      toast.error("Something went wrong!");
     }
-
-    console.log("Deleted item response:", res);
-  } catch (error) {
-    console.error("Error removing cart item:", error);
-    toast.error("Something went wrong!");
-  }
-};
-
-
-
-
-
-
-
-
+  };
 
   const info = {
     cartCount,
@@ -95,7 +84,7 @@ export const CartProvider = ({ children }) => {
     refetch,
     totalPrice,
     userCartEmail,
-    handleClearUserCart
+    handleClearUserCart,
   };
   return <CartContext value={info}>{children}</CartContext>;
 };
