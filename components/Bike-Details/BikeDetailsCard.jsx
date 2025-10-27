@@ -3,12 +3,14 @@
 import { useCart } from "@/app/ContextApi/CartContext";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
+import { useSession } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 import toast from "react-hot-toast";
 
 const BikeDetailsCard = ({ bikeId }) => {
+  const {data:session}=useSession
   const { refetch } = useCart();
   const {
     data: allBikes = [],
@@ -43,10 +45,40 @@ const BikeDetailsCard = ({ bikeId }) => {
       <h2 className="text-red-500 text-center mt-10 text-xl">Bike not found</h2>
     );
   // HANDLE ADD TO CART BUTTON STARTS HERE
+  // const handleAddToCart = async (productData) => {
+  //   console.log(productData, "this is in handleAddToCart Functions");
+  //   const { _id, model, image, price, quantity, isFeatured } = productData;
+  //   const cartData = {
+  //     productId: _id,
+  //     productName: model,
+  //     productImage: image,
+  //     productPrice: price,
+  //     prodcutQuantity: quantity,
+  //     isFeatured,
+  //   };
+  //   //cart data save to the db starts here
+  //   const res = await axios.post("/api/carts", cartData);
+  //   refetch();
+  //   console.log("this is res", res);
+
+  //   toast.success("Item added to the cart Successfullyp");
+  // };
+
+
+
+
+
+
+
+  //new one 
   const handleAddToCart = async (productData) => {
-    console.log(productData, "this is in handleAddToCart Functions");
+  try {
+    console.log(productData, "this is in handleAddToCart Function");
+
     const { _id, model, image, price, quantity, isFeatured } = productData;
-    const cartData = {
+
+    // 🟢 single product info
+    const cartItem = {
       productId: _id,
       productName: model,
       productImage: image,
@@ -54,13 +86,30 @@ const BikeDetailsCard = ({ bikeId }) => {
       prodcutQuantity: quantity,
       isFeatured,
     };
-    //cart data save to the db starts here
-    const res = await axios.post("/api/carts", cartData);
-    refetch();
-    console.log("this is res", res);
 
-    toast.success("Item added to the cart Successfullyp");
-  };
+    // 🟢 full data (include user email)
+    const finalCartData = {
+      userEmail: session?.user?.email, // user email from next-auth session
+      product: cartItem, // send as product
+    };
+
+    // 🟢 API call
+    const res = await axios.post("/api/carts", finalCartData);
+
+    if (res.status === 200) {
+      toast.success("🛒 Item added to cart successfully!");
+      refetch(); // refresh cart data
+    } else {
+      toast.error("Failed to add item to cart!");
+    }
+
+    console.log("Response:", res.data);
+  } catch (error) {
+    console.error("Error adding to cart:", error);
+    toast.error("Something went wrong!");
+  }
+};
+
   return (
     <div className="container mx-auto px-4 mt-10 py-6">
       <div className="bg-[#fdf1ee] dark:bg-gray-900 rounded-xl shadow-xl overflow-hidden flex flex-col lg:flex-row lg:py-14">

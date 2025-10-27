@@ -10,9 +10,9 @@ export function ThemeProvider({ children, ...props }) {
   return (
     <NextThemesProvider {...props}>
       <TanstackProvider>
-        <CartProvider>
-          <SessionProvider>{children}</SessionProvider>
-        </CartProvider>
+        <SessionProvider>
+          <CartProvider>{children}</CartProvider>
+        </SessionProvider>
       </TanstackProvider>
     </NextThemesProvider>
   );

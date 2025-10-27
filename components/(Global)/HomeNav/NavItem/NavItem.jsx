@@ -20,8 +20,7 @@ const NavItem = () => {
   if (status === "loading") {
     return <p className="text-gray-500">Loading user info...</p>;
   }
-console.log(session,'this is from navitem');
-const {cartCount}=useCart()
+  const { cartCount } = useCart();
   return (
     <div className="flex items-center gap-12">
       {/* menu-items */}
@@ -63,7 +62,7 @@ const {cartCount}=useCart()
               News
             </Link>
           </li>
-          
+
           <li>
             <Link
               href={"/contact"}
@@ -78,7 +77,7 @@ const {cartCount}=useCart()
           </li>
 
           {/* cart icon and cart page redirect here */}
-           <li className="relative">
+          <li className="relative">
             <Link
               href={"/carts"}
               className={
@@ -88,12 +87,12 @@ const {cartCount}=useCart()
               }
             >
               <ShoppingCart />
-               {/* Cart count badge */}
-        {cartCount > 0 && (
-          <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs w-5 h-5 rounded-full flex items-center justify-center">
-            {cartCount}
-          </span>
-        )}
+              {/* Cart count badge */}
+              {cartCount > 0 && (
+                <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs w-5 h-5 rounded-full flex items-center justify-center">
+                  {cartCount}
+                </span>
+              )}
             </Link>
           </li>
         </ul>

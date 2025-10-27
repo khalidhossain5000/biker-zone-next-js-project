@@ -7,8 +7,8 @@ import toast from "react-hot-toast";
 import Link from "next/link";
 
 const CartCard = () => {
-  const { cartData, totalPrice, refetch } = useCart();
-
+  const { finalCartData, totalPrice, refetch } = useCart();
+console.log(finalCartData,'this is final cartdata inside cartcard');
   // Remove item handler
   const handleRemove = async (id) => {
     const res = await axios.delete(`/api/carts?id=${id}`);
@@ -16,7 +16,7 @@ const CartCard = () => {
       toast.success("Item removed");
       refetch();
     }
-    console.log("this is res from delte hndle", res);
+    console.log("this is res from delte hndle", res,'thsi is id',id);
   };
 
   return (
@@ -25,15 +25,16 @@ const CartCard = () => {
         Your Cart Items
       </h2>
 
-      {cartData.length === 0 ? (
+
+      {finalCartData?.length === 0 ? (
         <p className="text-center text-gray-600 dark:text-gray-300 text-lg">
           Your cart is empty
         </p>
       ) : (
         <div className="space-y-5">
-          {cartData.map((item) => (
+          {finalCartData?.map((item) => (
             <div
-              key={item._id}
+              key={item.productId}
               className="flex flex-col md:flex-row items-center justify-between bg-white dark:bg-gray-800 shadow-md border border-gray-200 dark:border-gray-700 rounded-2xl p-4 hover:shadow-lg transition-all duration-300"
             >
               {/* Left: Image */}
@@ -61,7 +62,7 @@ const CartCard = () => {
 
                 {/* Remove button */}
                 <button
-                  onClick={() => handleRemove(item._id)}
+                  onClick={() => handleRemove(item.productId)}
                   className="mt-3 md:mt-0 bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-xl flex items-center gap-1 transition"
                 >
                   <X size={18} /> Remove
@@ -73,7 +74,7 @@ const CartCard = () => {
       )}
 
       {/* Total Section */}
-      {cartData.length > 0 && (
+      {finalCartData?.length > 0 && (
         <div className="mt-10 bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-lg border border-gray-200 dark:border-gray-700 max-w-lg mx-auto text-center">
           <h3 className="text-2xl font-semibold text-gray-800 dark:text-gray-100 mb-3">
             Total:

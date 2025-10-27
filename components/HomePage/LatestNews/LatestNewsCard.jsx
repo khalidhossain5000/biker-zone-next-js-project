@@ -20,7 +20,7 @@ const LatestNewsCard = () => {
 
   if (isLoading) return <h2 className="text-black">Loading newss...</h2>;
   if (error) return <h2 className="text-red-500">Error loading newss</h2>;
-  console.log(AllLatestNews, "from all latest enws here");
+  
   return (
     <div>
       <h2 className="text-xl text-center md:text-2xl lg:text-4xl xl:text-5xl font-semibold text-[#000000] dark:text-white">
