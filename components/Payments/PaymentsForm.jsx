@@ -7,15 +7,15 @@ import Swal from "sweetalert2";
 const PaymentsForm = () => {
   const [paymentMethod, setPaymentMethod] = useState("bKash");
   const [transactionId, setTransactionId] = useState("");
-  const { cartData, totalPrice } = useCart();
+  const { finalCartData, totalPrice,userCartEmail } = useCart();
   const guidelines = {
     bKash: "Send payment to 01634933390 and enter the transaction ID above.",
     Rocket: "Send payment to 01934933399 and enter the transaction ID above.",
     Nagad: "Send payment to 01712345678 and enter the transaction ID above.",
     Upay: "Send payment to 01898765432 and enter the transaction ID above.",
   };
-  const cartItem = { ...cartData };
-  console.log("this is cartItem", cartItem);
+  const cartItem = { ...finalCartData };
+  console.log("this is cartItem", cartItem,'final cart item',finalCartData,userCartEmail);
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!transactionId) {
@@ -23,7 +23,8 @@ const PaymentsForm = () => {
       return;
     }
     const paymentData = {
-      paymentItem: [...cartData],
+      userCartEmail,
+      paymentItem: [...finalCartData],
       transactionId,
       paymentMethod,
     };

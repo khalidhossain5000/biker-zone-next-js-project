@@ -46,11 +46,11 @@ export const CartProvider = ({ children }) => {
       </h2>
     );
 
-  const cartCount = cartData.cartItems.length;
-  const finalCartData=cartData.cartItems;
+  const cartCount = cartData?.cartItems?.length;
+  const finalCartData=cartData?.cartItems;
   const userCartEmail=cartData?.userEmail
   //total price
-  const totalPrice = cartData?.cartItems.reduce((sum, item) => {
+  const totalPrice = cartData?.cartItems?.reduce((sum, item) => {
     return sum + parseInt(item.productPrice);
   }, 0);
   const info = {

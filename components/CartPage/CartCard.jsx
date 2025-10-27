@@ -7,17 +7,40 @@ import toast from "react-hot-toast";
 import Link from "next/link";
 
 const CartCard = () => {
-  const { finalCartData, totalPrice, refetch } = useCart();
+  const { finalCartData, totalPrice, refetch,userCartEmail } = useCart();
+  
 console.log(finalCartData,'this is final cartdata inside cartcard');
   // Remove item handler
-  const handleRemove = async (id) => {
-    const res = await axios.delete(`/api/carts?id=${id}`);
+  // const handleRemove = async (id) => {
+  //   const res = await axios.delete(`/api/carts?id=${id}`);
+  //   if (res.data.success) {
+  //     toast.success("Item removed");
+  //     refetch();
+  //   }
+  //   console.log("this is res from delte hndle", res,'thsi is id',id);
+  // };
+
+  const handleRemove = async (productId) => {
+  try {
+    // ইউজারের email পাঠানো লাগবে
+    const res = await axios.delete(
+      `/api/carts?id=${productId}&email=${userCartEmail}`
+    );
+
     if (res.data.success) {
       toast.success("Item removed");
-      refetch();
+      refetch(); // cart update
+    } else {
+      toast.error("Failed to remove item");
     }
-    console.log("this is res from delte hndle", res,'thsi is id',id);
-  };
+
+    console.log("Deleted item response:", res, "Product ID:", productId);
+  } catch (error) {
+    console.error("Error removing cart item:", error);
+    toast.error("Something went wrong!");
+  }
+};
+
 
   return (
     <div className="container mx-auto  px-4 md:px-10 py-10 transition-colors duration-300">

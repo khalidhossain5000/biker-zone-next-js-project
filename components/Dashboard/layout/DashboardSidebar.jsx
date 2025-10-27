@@ -1,5 +1,5 @@
 "use client";
-import { BadgePlus, Bike, House, Motorbike, Newspaper } from "lucide-react";
+import { BadgePlus, Bike, House, Motorbike, Newspaper, Package } from "lucide-react";
 import React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -45,6 +45,11 @@ if(role==='admin'){
       name: "Add Latest News",
       path: "/dashboard/all-latest-news",
       icon: <Newspaper  className="w-5 h-5" />,
+    },
+    {
+      name: "All Orders",
+      path: "/dashboard/all-orders",
+      icon: <Package  className="w-5 h-5" />,
     },
   ];
 }

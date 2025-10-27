@@ -10,7 +10,8 @@ import React from "react";
 import toast from "react-hot-toast";
 
 const BikeDetailsCard = ({ bikeId }) => {
-  const {data:session}=useSession
+  const {data:session,status}=useSession()
+  console.log(session,status,'this is session and stats in bikedetailscard page');
   const { refetch } = useCart();
   const {
     data: allBikes = [],
@@ -22,12 +23,15 @@ const BikeDetailsCard = ({ bikeId }) => {
       const res = await axios.get("/api/admin/bikes");
       return res.data.allBikes;
     },
+    
   });
 
-  if (isLoading)
+
+
+  if (isLoading || status!='authenticated')
     return (
       <h2 className="text-gray-800 dark:text-gray-100 text-center mt-10 text-xl">
-        Loading bikes...
+        Loading bikes and email of the user...
       </h2>
     );
 
