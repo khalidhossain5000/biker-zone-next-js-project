@@ -27,6 +27,7 @@ const PaymentsForm = () => {
       paymentItem: [...finalCartData],
       transactionId,
       paymentMethod,
+      paymentStatus:'pending'
     };
     const res = await axios.post("/api/payments", paymentData);
     if (res.data.message) {
