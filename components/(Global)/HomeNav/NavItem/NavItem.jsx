@@ -21,6 +21,7 @@ const NavItem = () => {
     return <p className="text-gray-500">Loading user info...</p>;
   }
   const { cartCount } = useCart();
+  console.log(session,'this is ession in a navitem');
   return (
     <div className="flex items-center gap-12">
       {/* menu-items */}

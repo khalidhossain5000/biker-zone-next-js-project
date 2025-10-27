@@ -28,24 +28,7 @@ export const CartProvider = ({ children }) => {
       enabled: !!session?.user?.email,
     });
 
-  if (isLoading || status !== "authenticated")
-    return (
-      <h2 className="text-gray-800 dark:text-gray-100 text-center mt-10 text-xl">
-        Loading bikes...
-      </h2>
-    );
-  console.log(
-    cartData,
-    "this is cartdata this is what ",
-    session.user.email,
-    status
-  );
-  if (error)
-    return (
-      <h2 className="text-red-500 text-center mt-10 text-xl">
-        Error loading bikes
-      </h2>
-    );
+  
 
   const cartCount = cartData?.cartItems?.length;
   const finalCartData = cartData?.cartItems;
