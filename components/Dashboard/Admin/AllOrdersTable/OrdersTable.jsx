@@ -30,7 +30,7 @@ const OrdersTable = () => {
 
   const handleComplete = async (id) => {
     try {
-      const res = await axios.patch(`/api/admin/complete-order?id=${id}`);
+      const res = await axios.patch(`/api/admin/all-orders-payments?id=${id}`);
       if (res.data.success) {
         toast.success("Order marked as completed!");
         refetch();
@@ -45,7 +45,7 @@ const OrdersTable = () => {
 
   const handleDelete = async (id) => {
     try {
-      const res = await axios.delete(`/api/admin/delete-order?id=${id}`);
+      const res = await axios.delete(`/api/admin/all-orders-payments?id=${id}`);
       if (res.data.success) {
         toast.success("Order deleted successfully!");
         refetch();
