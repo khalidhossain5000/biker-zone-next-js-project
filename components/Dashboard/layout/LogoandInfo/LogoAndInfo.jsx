@@ -29,6 +29,7 @@ const LogoAndInfo = () => {
               <h2 className="text-xl font-bold text-black dark:text-white">
                 Email: {session?.user.email}
               </h2>
+              <h2>Name:{session?.user?.name}</h2>
               <p>Role:{session?.user.role}</p>
             </div>
           </div>

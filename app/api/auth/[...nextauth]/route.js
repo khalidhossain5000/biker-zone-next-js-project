@@ -40,7 +40,7 @@ export const authOptions = {
           name: user.name,
           email: user.email,
           role: user.role,
-          image: user.image , // include image
+          image: user.image, // include image
         };
       },
     }),
@@ -73,22 +73,61 @@ export const authOptions = {
       return true;
     },
 
-    async jwt({ token, user }) {
+    // async jwt({ token, user ,trigger,session}) {
+    //   if (user) {
+    //     token.id = user.id;
+    //     token.name = user.name;
+    //     token.email = user.email;
+    //     token.role = user.role;
+    //     token.image = user.image ; // include image
+    //   }
+
+    //   else {
+    //     const usersCollection = await getUsersCollection();
+    //     const existingUser = await usersCollection.findOne({
+    //       email: token.email,
+    //     });
+
+    //     //update profile
+    //     if(trigger==='update' && session?.user){
+    //       token.name=session.user?.name;
+    //       token.image=session?.user?.image
+    //     }
+
+    //     if (existingUser) {
+    //       token.role = existingUser.role;
+    //     }
+    //   }
+    //   return token;
+    // },
+
+    async jwt({ token, user, trigger, session }) {
       if (user) {
         token.id = user.id;
         token.name = user.name;
         token.email = user.email;
         token.role = user.role;
-        token.image = user.image ; // include image
-      } else {
+        token.image = user.image; // include image
+      }
+
+      // ✅ Fix: trigger === 'update' অংশ এখানে থাকবে, else-এর ভিতরে নয়
+      if (trigger === "update" && session?.user) {
+        token.name = session.user.name;
+        token.image = session.user.image;
+      }
+
+      // ✅ DB থেকে role/image refresh করতে পারো (optional)
+      if (!user) {
         const usersCollection = await getUsersCollection();
         const existingUser = await usersCollection.findOne({
           email: token.email,
         });
         if (existingUser) {
           token.role = existingUser.role;
+          token.image = existingUser.image;
         }
       }
+
       return token;
     },
 
@@ -98,7 +137,7 @@ export const authOptions = {
         name: token.name,
         email: token.email,
         role: token.role,
-        image: token.image // include image
+        image: token.image, // include image
       };
       return session;
     },
