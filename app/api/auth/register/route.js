@@ -26,7 +26,7 @@ export async function POST(req) {
     password: hashedPassword,
     role,
     provider: "credentials",
-    image:image || 'https://i.ibb.co/zVB99J4d/DEFAULT.jpg'
+    image:image 
   });
 
   //  Return a success message

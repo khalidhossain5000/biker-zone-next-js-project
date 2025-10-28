@@ -8,14 +8,16 @@ import React, { useState, useEffect } from "react";
 import toast from "react-hot-toast";
 
 const UpdateProfileForm = () => {
-  const { data: session, status } = useSession();
+  const { data: session, status, update } = useSession(); 
   const userEmail = session?.user?.email;
 
   const queryClient = useQueryClient();
 
   const [username, setUsername] = useState("");
   const [imageUrl, setImageUrl] = useState("");
-console.log(imageUrl,'image url this is si ');
+
+  console.log(imageUrl, 'image url this is si ');
+
   // Fetch current user data
   const {
     data: singleUserData,
@@ -31,11 +33,11 @@ console.log(imageUrl,'image url this is si ');
     enabled: !!userEmail,
   });
 
-  // Set default values
+  // Set default values from fetched data
   useEffect(() => {
     if (singleUserData) {
       setUsername(singleUserData.name || "");
-      setImageUrl(singleUserData.image || "");
+      setImageUrl(singleUserData.image || "https://i.ibb.co/zVB99J4d/DEFAULT.jpg");
     }
   }, [singleUserData]);
 
@@ -55,7 +57,19 @@ console.log(imageUrl,'image url this is si ');
         image: imageUrl,
       };
 
+      // 1Update DB
       await axios.put(`/api/admin/update-user?email=${userEmail}`, updatedData);
+
+      // Update NextAuth session immediately
+      await update({
+        ...session,
+        user: {
+          ...session.user,
+          name: username,
+          image: imageUrl,
+        },
+      });
+
       toast.success("Profile updated successfully!");
       refetch();
       queryClient.invalidateQueries(["single-user", userEmail]);

@@ -40,7 +40,7 @@ export const authOptions = {
           name: user.name,
           email: user.email,
           role: user.role,
-          image: user.image || "https://i.ibb.co/zVB99J4d/DEFAULT.jpg", // include image
+          image: user.image , // include image
         };
       },
     }),
@@ -63,7 +63,7 @@ export const authOptions = {
           await usersCollection.insertOne({
             name: user.name,
             email: user.email,
-            image: user.image || "https://i.ibb.co/zVB99J4d/DEFAULT.jpg", // include image
+            image: user.image, // include image
             role: "user",
             provider: "google",
           });
@@ -79,7 +79,7 @@ export const authOptions = {
         token.name = user.name;
         token.email = user.email;
         token.role = user.role;
-        token.image = user.image || "https://i.ibb.co/zVB99J4d/DEFAULT.jpg"; // include image
+        token.image = user.image ; // include image
       } else {
         const usersCollection = await getUsersCollection();
         const existingUser = await usersCollection.findOne({
@@ -98,7 +98,7 @@ export const authOptions = {
         name: token.name,
         email: token.email,
         role: token.role,
-        image: token.image || "https://i.ibb.co/zVB99J4d/DEFAULT.jpg", // include image
+        image: token.image // include image
       };
       return session;
     },
