@@ -1,15 +1,10 @@
-
 # GoRide - Bike Shop Next Js Project.
 
 **GoRide** is a modern and responsive bike shop web application built with **Next.js**, **Tailwind CSS**, **NextAuth**, and **MongoDB**, designed to provide users with a smooth and secure shopping experience. It allows users to browse and explore bikes, view detailed product information, and manage their profiles with real-time updates and image uploads. The project includes authentication using both Google and email/password, supports light and dark themes, and features a clean, dynamic UI optimized for performance and usability.
 
-
 ## 🚀 Live Site
 
 https://biker-zone-next-js-project.vercel.app
-
-
-
 
 ## Features
 
@@ -26,19 +21,11 @@ https://biker-zone-next-js-project.vercel.app
 - Admin can Manage products and Manage All Users and Their Role in Admin Dashboard.
 - Dropdown menu for profile options.
 - Edit Profile info in their dashboard page .
+- Featured Bike Added on the Home page.
 - Shopping cart with secure checkout process.
 - Order Mangement in admin dashboard and order history in user dashboard.
 
-
-
-
-
-
-
-
-
 ## Setup & installation instructions
-
 
 1.Clone the repository
 
@@ -65,7 +52,6 @@ MONGODB_URI=your_mongodb_connection_string
 
 ```
 
-
 4.Run the development server
 
 ```bash
@@ -82,20 +68,19 @@ http://localhost:3000
 
 ## Technologies Used
 
-- Next.js  
-- React  
-- Tailwind CSS  
-- NextAuth.js  
-- MongoDB  
-- TanStack Query  
-- Axios  
-- Bcrypt  
-- BcryptJS  
-- Lucide React  
+- Next.js
+- React
+- Tailwind CSS
+- NextAuth.js
+- MongoDB
+- TanStack Query
+- Axios
+- Bcrypt
+- BcryptJS
+- Lucide React
 - **ShadCdn**
-- React Hook Form  
-- React Hot Toast  
-- SweetAlert2  
-- Swiper  
-- Next Themes  
-  
+- React Hook Form
+- React Hot Toast
+- SweetAlert2
+- Swiper
+- Next Themes
