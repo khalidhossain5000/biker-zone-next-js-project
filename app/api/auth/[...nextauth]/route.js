@@ -46,10 +46,10 @@ export const authOptions = {
     }),
   ],
 
-  // 🔐 Session config
+  // Session config
   session: { strategy: "jwt" },
 
-  // 🧾 Callbacks
+  // Callbacks
   callbacks: {
     async signIn({ user, account, profile }) {
       const usersCollection = await getUsersCollection();
@@ -110,13 +110,11 @@ export const authOptions = {
         token.image = user.image; // include image
       }
 
-      // ✅ Fix: trigger === 'update' অংশ এখানে থাকবে, else-এর ভিতরে নয়
       if (trigger === "update" && session?.user) {
         token.name = session.user.name;
         token.image = session.user.image;
       }
 
-      // ✅ DB থেকে role/image refresh করতে পারো (optional)
       if (!user) {
         const usersCollection = await getUsersCollection();
         const existingUser = await usersCollection.findOne({

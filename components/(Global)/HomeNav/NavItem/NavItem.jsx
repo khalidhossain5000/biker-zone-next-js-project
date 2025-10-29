@@ -15,13 +15,13 @@ import { ShoppingCart } from "lucide-react";
 import { useCart } from "@/app/ContextApi/CartContext";
 import { ModeToggle } from "../../Theme/ThemeToggle";
 const NavItem = () => {
+  const { cartCount } = useCart();
   const pathname = usePathname();
   const { data: session, status } = useSession();
   if (status === "loading") {
     return <p className="text-gray-500">Loading user info...</p>;
   }
-  const { cartCount } = useCart();
-  console.log(session,session.user.image,'this is ession in a navitem');
+  // console.log(session, session?.user?.image, "this is ession in a navitem");
   return (
     <div className="flex items-center gap-12">
       {/* menu-items */}
@@ -105,14 +105,14 @@ const NavItem = () => {
         {session?.user && (
           <DropdownMenu>
             <DropdownMenuTrigger>
-              <Image
+              <img
                 src={
                   session.user.image || "https://i.ibb.co/zVB99J4d/DEFAULT.jpg"
                 }
-                alt="user profile image here added"
-                width={50}
-                height={50}
-                className="rounded-full cursor-pointer"
+                alt="user profile image "
+                // width={100}
+                // height={50}
+                className="w-12 lg:w-20 rounded-full cursor-pointer"
               />
             </DropdownMenuTrigger>
             <DropdownMenuContent>

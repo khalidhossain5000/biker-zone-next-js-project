@@ -67,16 +67,6 @@ if(role==='admin'){
       icon: <House className="w-5 h-5" />,
     },
     {
-      name: "Add Review",
-      path: "/dashboard/all-latest-news",
-      icon: <Newspaper  className="w-5 h-5" />,
-    },
-    {
-      name: "My Review",
-      path: "/dashboard/all-latest-news",
-      icon: <Newspaper  className="w-5 h-5" />,
-    },
-    {
       name: "My Orders",
       path: "/dashboard/all-latest-news",
       icon: <Newspaper  className="w-5 h-5" />,
