@@ -82,19 +82,20 @@ http://localhost:3000
 
 ## Technologies Used
 
-Next.js  
-React  
-Tailwind CSS  
-NextAuth.js  
-MongoDB  
-TanStack Query  
-Axios  
-Bcrypt  
-BcryptJS  
-Lucide React  
-**ShadCdn**
-React Hook Form  
-React Hot Toast  
-SweetAlert2  
-Swiper  
-Next Themes  
+- Next.js  
+- React  
+- Tailwind CSS  
+- NextAuth.js  
+- MongoDB  
+- TanStack Query  
+- Axios  
+- Bcrypt  
+- BcryptJS  
+- Lucide React  
+- **ShadCdn**
+- React Hook Form  
+- React Hot Toast  
+- SweetAlert2  
+- Swiper  
+- Next Themes  
+  
