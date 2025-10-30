@@ -9,8 +9,9 @@ import toast from "react-hot-toast";
 
 const LoginPage = () => {
   const [error, setError] = useState("");
-
   const [loading, setLoading] = useState(false);
+
+  // Normal login
   const handleSubmit = async (e) => {
     e.preventDefault();
     const form = e.target;
@@ -23,17 +24,37 @@ const LoginPage = () => {
       email,
       password,
     });
-    alert("login success");
-    console.log(result, "this is result in login page");
+
     if (result.error) {
       setLoading(false);
       setError("Invalid email or password");
     } else {
       setLoading(false);
-      toast.success("Logi n sucess");
-      window.location.href = "/";
+      toast.success("Login successful");
+      window.location.href = "/dashboard";
     }
   };
+
+  // Admin login
+  const handleAdminLogin = async () => {
+    setLoading(true);
+
+    const result = await signIn("credentials", {
+      redirect: false,
+      email: "admin@goride.com", 
+      password: "admin@goride.com", 
+    });
+
+    if (result.error) {
+      setLoading(false);
+      setError("Admin login failed");
+    } else {
+      setLoading(false);
+      toast.success("Admin login successful");
+      window.location.href = "/"; 
+    }
+  };
+
   return (
     <div className="min-h-screen flex ">
       {/* Left Side - Image */}
@@ -65,6 +86,10 @@ const LoginPage = () => {
             Welcome Back
           </h2>
 
+          {error && (
+            <p className="text-red-500 text-center mb-2 font-medium">{error}</p>
+          )}
+
           <form onSubmit={handleSubmit} className="space-y-5">
             <div>
               <label
@@ -76,6 +101,7 @@ const LoginPage = () => {
               <input
                 type="email"
                 id="email"
+                name="email"
                 placeholder="you@example.com"
                 className="w-full px-4 py-3 rounded-md border border-gray-300 dark:border-gray-600 bg-transparent text-gray-800 dark:text-gray-100 focus:ring-2 focus:ring-blue-500 outline-none"
                 required
@@ -92,17 +118,30 @@ const LoginPage = () => {
               <input
                 type="password"
                 id="password"
+                name="password"
                 placeholder="••••••••"
                 className="w-full px-4 py-3 rounded-md border border-gray-300 dark:border-gray-600 bg-transparent text-gray-800 dark:text-gray-100 focus:ring-2 focus:ring-blue-500 outline-none"
                 required
               />
             </div>
 
+            {/* Normal Login Button */}
             <button
               type="submit"
               className="w-full bg-primary text-white py-3 rounded-md font-semibold hover:bg-primary/90 cursor-pointer transition"
+              disabled={loading}
             >
-              Login
+              {loading ? "Logging in..." : "Login"}
+            </button>
+
+            {/* Admin Login Button */}
+            <button
+              type="button"
+              onClick={handleAdminLogin}
+              className="w-full mt-2 bg-green-600 text-white py-3 rounded-md font-semibold hover:bg-green-700 cursor-pointer transition"
+              disabled={loading}
+            >
+              {loading ? "Logging in..." : "Login as Admin"}
             </button>
 
             <p className="text-center text-sm text-gray-600 dark:text-gray-400">
