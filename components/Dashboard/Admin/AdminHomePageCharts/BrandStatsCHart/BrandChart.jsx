@@ -34,7 +34,7 @@ const BrandChart = () => {
       <h2 className="text-center text-red-500">Error loading brand stats</h2>
     );
 
-  // Prepare chart data
+  // Prepare chart data to show in the pie
   const colors = ["#f97316", "#ff6900", "#22c55e", "#3b82f6", "#8b5cf6"];
   const chartData = brandStats.map((item, index) => ({
     name: item._id || "Unknown",
@@ -49,7 +49,6 @@ const BrandChart = () => {
       </CardHeader>
 
       <CardContent className="pb-0">
-        {/* Parent div height control for responsiveness */}
         <div className="w-full h-[250px] sm:h-[300px] lg:h-[400px]">
           <ResponsiveContainer width="100%" height="100%">
             <PieChart>
