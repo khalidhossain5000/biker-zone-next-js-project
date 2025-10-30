@@ -44,8 +44,8 @@ const BrandChart = () => {
   // Prepare chart data
   const colors = ["#f97316", "#ff6900", "#22c55e", "#3b82f6", "#8b5cf6"];
   const chartData = brandStats.map((item, index) => ({
-    name: item._id || "Unknown", // name used for label
-    value: item.count || 0, // value used for Pie
+    name: item._id || "Unknown", 
+    value: item.count || 0, 
     fill: colors[index % colors.length],
   }));
 
