@@ -52,7 +52,7 @@ const BrandChart = () => {
   return (
     <Card className="border-none w-full mx-auto">
       <CardHeader className="pb-0">
-        <CardTitle>Brand-wise Total Bike Count Stats Chart</CardTitle>
+        <CardTitle>Brand-wise Total Bike Count Stats Pie Chart Below</CardTitle>
       </CardHeader>
 
       <CardContent className=" pb-0">
@@ -65,7 +65,7 @@ const BrandChart = () => {
             cx="50%"
             cy="50%"
             outerRadius={190}
-            fill="#8884d8"
+            fill="#8884d9"
             label
           >
             <LabelList dataKey="name" />
