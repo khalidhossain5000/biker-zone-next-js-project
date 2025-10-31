@@ -13,7 +13,6 @@ import {
 } from "@/components/ui/card";
 
 const BrandChart = () => {
-  //  Fetch brand-wise data
   const { data: brandStats = [], isLoading, error } = useQuery({
     queryKey: ["brand-stats"],
     queryFn: async () => {
