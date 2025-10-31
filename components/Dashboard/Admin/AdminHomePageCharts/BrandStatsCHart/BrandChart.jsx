@@ -11,6 +11,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import SkletonLoading from "@/components/(Global)/Loader/SkletonLoading/SkletonLoading";
 
 const BrandChart = () => {
   const { data: brandStats = [], isLoading, error } = useQuery({
@@ -20,12 +21,9 @@ const BrandChart = () => {
       return res.data.brandStats || [];
     },
   });
-
   if (isLoading)
     return (
-      <h2 className="text-center text-black dark:text-white">
-        Loading brand stats...
-      </h2>
+      <SkletonLoading/>
     );
 
   if (error)
