@@ -5,11 +5,12 @@ import axios from "axios";
 import { useQuery } from "@tanstack/react-query";
 import { MdEmojiEvents, MdSell } from "react-icons/md";
 import { FaRegMoneyBillAlt } from "react-icons/fa";
+import { useSession } from "next-auth/react";
 
 const UserHome = () => {
   // ✅ Replace this with your logged-in user's email dynamically later
-  const userEmail = "mailforoverdsgsdgdsgdsalltst@gmail.com";
-
+  const {data:session}=useSession()
+  const userEmail = session?.user?.email;
   // ✅ Fetch order stats data using Tanstack Query
   const { data, isLoading, error } = useQuery({
     queryKey: ["user-order-stats", userEmail],
@@ -17,6 +18,7 @@ const UserHome = () => {
       const res = await axios.get(`/api/user-order-data-stats?email=${userEmail}`);
       return res.data.stats;
     },
+    enabled:!!userEmail
   });
 
   if (isLoading)
