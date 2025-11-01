@@ -42,39 +42,33 @@
 
 
 
-
-
-
 import nodemailer from "nodemailer";
 
 export async function POST(req) {
   try {
-    const { to, subject, text } = await req.json();
+    const { to, subject, html } = await req.json();
 
-    // ✅ Use simple App Password auth (no OAuth2)
     const transporter = nodemailer.createTransport({
       service: "gmail",
       auth: {
         user: process.env.GOOGLE_USER,
-        pass: process.env.GOOGLE_PASS,
+        pass: process.env.GOOGLE_PASS, // 🟢 app password
       },
     });
 
     const info = await transporter.sendMail({
-      from: process.env.GOOGLE_USER,
+      from: `"BikeShop" <${process.env.GOOGLE_USER}>`,
       to,
-      subject: subject || "Test Email",
-      text: text || "Hello from your Next.js app via App Password!",
+      subject,
+      html, // ✅ sending HTML
     });
 
-    return Response.json({ message: "✅ Email sent successfully!", info });
+    return Response.json({ message: "Invoice email sent successfully!", info });
   } catch (error) {
-    console.error("Email send error:", error);
+    console.error("Email error:", error);
     return Response.json({ error: error.message }, { status: 500 });
   }
 }
-
-
 
 
 
