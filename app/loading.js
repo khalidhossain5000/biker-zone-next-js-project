@@ -2,8 +2,8 @@
 import React, { useEffect, useRef } from "react";
 import Image from "next/image";
 import { gsap } from "gsap";
-// import bikeLogo from "../../../../assets/loadingImgs/bike-logs.png"; // demo path - change if needed
-import bikeLogo from "../../../../assets/loadingImgs/bike-logs-removebg-preview.png"; // demo path - change if needed
+import bikeLogo from "../assets/loadingImgs/bike-logs.png"; // demo path - change if needed
+
 
 const Loading = () => {
   const containerRef = useRef(null);
@@ -62,7 +62,7 @@ const Loading = () => {
           alt="Bike Loader"
           width={110}
           height={110}
-          className="relative drop-shadow-[0_0_15px_#60a5fa]"
+          className="relative drop-shadow-[0_0_15px_#60a5fa] rounded-full"
         />
       </div>
 

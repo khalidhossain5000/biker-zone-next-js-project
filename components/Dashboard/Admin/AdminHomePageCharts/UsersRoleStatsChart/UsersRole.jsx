@@ -29,6 +29,8 @@ import {
   ChartTooltipContent,
   ChartConfig,
 } from "@/components/ui/chart";
+import SkletonLoading from "@/components/(Global)/Loader/SkletonLoading/SkletonLoading";
+import Loading from "@/components/(Global)/Loader/MainLoading/Loading";
 
 const UsersRoleBar = () => {
   // 🔹 Fetch user role stats
@@ -46,7 +48,8 @@ const UsersRoleBar = () => {
   });
 
   if (isLoading)
-    return <h2 className="text-center text-gray-400">Loading user roles...</h2>;
+    // return <SkletonLoading/>
+    return <Loading/>
   if (error)
     return (
       <h2 className="text-center text-red-500">Error loading user roles 😢</h2>

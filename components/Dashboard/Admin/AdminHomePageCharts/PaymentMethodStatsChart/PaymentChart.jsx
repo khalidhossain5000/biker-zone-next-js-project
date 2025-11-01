@@ -19,6 +19,7 @@ import {
   ChartTooltip,
   ChartTooltipContent,
 } from "@/components/ui/chart";
+import SkletonLoading from "@/components/(Global)/Loader/SkletonLoading/SkletonLoading";
 
 const PaymentChart = () => {
   // Fetch payment method stats using React Query
@@ -36,7 +37,7 @@ const PaymentChart = () => {
 
   if (isLoading)
     return (
-      <h2 className="text-center text-gray-400">Loading payment stats...</h2>
+     <SkletonLoading/>
     );
 
   if (error)
