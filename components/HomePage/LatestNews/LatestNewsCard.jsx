@@ -14,7 +14,7 @@ const LatestNewsCard = () => {
     queryKey: ["all-newss"],
     queryFn: async () => {
       const res = await axios.get("/api/admin/latest-news");
-      return res.data.data;
+      return res.data.data ;
     },
   });
 

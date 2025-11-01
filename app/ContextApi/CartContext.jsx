@@ -33,6 +33,7 @@ export const CartProvider = ({ children }) => {
   const cartCount = cartData?.cartItems?.length;
   const finalCartData = cartData?.cartItems;
   const userCartEmail = cartData?.userEmail;
+  console.log(userCartEmail,'this is in user context api of cart context');
   //total price
   const totalPrice = cartData?.cartItems?.reduce((sum, item) => {
     return sum + parseInt(item.productPrice);

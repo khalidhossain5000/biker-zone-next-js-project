@@ -13,8 +13,10 @@ import {
 } from "@/components/ui/table";
 import { Loader2, Info } from "lucide-react";
 import toast from "react-hot-toast";
+// import { useCart } from "@/app/ContextApi/CartContext";
 
 const OrdersTable = () => {
+  const userCartEmail=''
   const {
     data: orders = [],
     isLoading,
@@ -58,6 +60,26 @@ const OrdersTable = () => {
     }
   };
 
+  
+ const handleSendEmail = async (orderId) => {
+    if (!userCartEmail) {
+      alert("User email not found!");
+      return;
+    }
+
+    try {
+      const { data } = await axios.post("/api/emailsend/invoice-send", {
+        orderId,
+        to: userCartEmail, 
+      });
+
+      alert(data.message || "Email sent successfully!");
+    } catch (error) {
+      console.error(error);
+      alert(error.response?.data?.error || "Failed to send email");
+    }
+  };
+
   if (isLoading)
     return (
       <div className="flex justify-center items-center py-20">
@@ -75,7 +97,7 @@ const OrdersTable = () => {
       </p>
     );
 
-  // ✅ If no orders found
+  //  If no orders found
   if (!orders || orders.length === 0)
     return (
       <div className="flex flex-col justify-center items-center py-20 text-center">
@@ -179,6 +201,12 @@ const OrdersTable = () => {
                       className="cursor-pointer bg-green-600 hover:bg-green-700 text-white font-medium px-4 py-2 rounded-lg transition w-full sm:w-auto"
                     >
                       Complete
+                    </button>
+                    <button
+                      onClick={() => handleSendEmail(order._id)}
+                      className="cursor-pointer bg-slate-600 hover:bg-green-700 text-white font-medium px-4 py-2 rounded-lg transition w-full sm:w-auto"
+                    >
+                      Send Invoice To User Email
                     </button>
                     <button
                       onClick={() => handleDelete(order._id)}
