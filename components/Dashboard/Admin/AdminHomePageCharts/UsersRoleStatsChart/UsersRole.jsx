@@ -48,8 +48,7 @@ const UsersRoleBar = () => {
   });
 
   if (isLoading)
-    // return <SkletonLoading/>
-    return <Loading/>
+    return <SkletonLoading/>
   if (error)
     return (
       <h2 className="text-center text-red-500">Error loading user roles 😢</h2>

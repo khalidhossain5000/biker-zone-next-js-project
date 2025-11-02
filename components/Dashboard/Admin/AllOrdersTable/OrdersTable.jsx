@@ -13,7 +13,6 @@ import {
 } from "@/components/ui/table";
 import { Loader2, Info } from "lucide-react";
 import toast from "react-hot-toast";
-// import { useCart } from "@/app/ContextApi/CartContext";
 
 const OrdersTable = () => {
   const {
@@ -58,74 +57,6 @@ const OrdersTable = () => {
       toast.error("Failed to delete order!");
     }
   };
-
-  // const handleSendEmail = async (order) => {
-  //   console.log(order, "Order details for sending email");
-
-  //   const cartMail = order?.userCartEmail;
-  //   if (!cartMail) {
-  //     alert("User email not found!");
-  //     return;
-  //   }
-
-  //   // 🧾 Professional HTML invoice design (simple but clean)
-  //   const htmlContent = `
-  //     <div style="font-family: Arial, sans-serif; padding: 20px; background: #f9f9f9;">
-  //       <div style="max-width: 600px; margin: auto; background: white; padding: 20px; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.1)">
-  //         <h2 style="text-align: center; color: #2563eb;">BikeShop Invoice</h2>
-  //         <p>Hi <b>${cartMail}</b>,</p>
-  //         <p>Thank you for your order! Below are your order details:</p>
-
-  //         <h3 style="color:#111">🧾 Order Summary</h3>
-  //         <p><b>Transaction ID:</b> ${order.transactionId}</p>
-  //         <p><b>Payment Method:</b> ${order.paymentMethod}</p>
-  //         <p><b>Payment Status:</b> <span style="color:${order.paymentStatus === "completed" ? "green" : "orange"}">${order.paymentStatus}</span></p>
-
-  //         <h3 style="margin-top:20px;">🛍️ Products</h3>
-  //         <table style="width:100%; border-collapse: collapse;">
-  //           <thead>
-  //             <tr style="background:#2563eb; color:white;">
-  //               <th style="padding:8px; border:1px solid #ddd;">Product</th>
-  //               <th style="padding:8px; border:1px solid #ddd;">Price</th>
-  //               <th style="padding:8px; border:1px solid #ddd;">Quantity</th>
-  //             </tr>
-  //           </thead>
-  //           <tbody>
-  //             ${order.paymentItem
-  //               .map(
-  //                 (item) => `
-  //               <tr>
-  //                 <td style="padding:8px; border:1px solid #ddd;">${item.productName}</td>
-  //                 <td style="padding:8px; border:1px solid #ddd;">$${item.productPrice}</td>
-  //                 <td style="padding:8px; border:1px solid #ddd;">${item.prodcutQuantity}</td>
-  //               </tr>
-  //             `
-  //               )
-  //               .join("")}
-  //           </tbody>
-  //         </table>
-
-  //         <p style="margin-top:20px; font-size:14px; color:#555;">If you have any questions, feel free to reply to this email.</p>
-
-  //         <hr/>
-  //         <p style="text-align:center; font-size:12px; color:#aaa;">© ${new Date().getFullYear()} BikeShop. All rights reserved.</p>
-  //       </div>
-  //     </div>
-  //   `;
-
-  //   try {
-  //     const { data } = await axios.post("/api/emailsend/invoice-send", {
-  //       to: cartMail,
-  //       subject: `Invoice for Your Order (${order.transactionId})`,
-  //       html: htmlContent, // sending HTML invoice instead of text
-  //     });
-
-  //     alert(data.message || "Email sent successfully!");
-  //   } catch (error) {
-  //     console.error(error);
-  //     alert(error.response?.data?.error || "Failed to send email");
-  //   }
-  // };
 
   const handleSendEmail = async (order) => {
     console.log(order, "📦 Order data before sending email");
