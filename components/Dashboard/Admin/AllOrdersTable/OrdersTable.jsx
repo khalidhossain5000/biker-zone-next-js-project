@@ -16,7 +16,6 @@ import toast from "react-hot-toast";
 // import { useCart } from "@/app/ContextApi/CartContext";
 
 const OrdersTable = () => {
-  
   const {
     data: orders = [],
     isLoading,
@@ -60,91 +59,85 @@ const OrdersTable = () => {
     }
   };
 
-  
+  // const handleSendEmail = async (order) => {
+  //   console.log(order, "Order details for sending email");
 
-// const handleSendEmail = async (order) => {
-//   console.log(order, "Order details for sending email");
+  //   const cartMail = order?.userCartEmail;
+  //   if (!cartMail) {
+  //     alert("User email not found!");
+  //     return;
+  //   }
 
-//   const cartMail = order?.userCartEmail;
-//   if (!cartMail) {
-//     alert("User email not found!");
-//     return;
-//   }
+  //   // 🧾 Professional HTML invoice design (simple but clean)
+  //   const htmlContent = `
+  //     <div style="font-family: Arial, sans-serif; padding: 20px; background: #f9f9f9;">
+  //       <div style="max-width: 600px; margin: auto; background: white; padding: 20px; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.1)">
+  //         <h2 style="text-align: center; color: #2563eb;">BikeShop Invoice</h2>
+  //         <p>Hi <b>${cartMail}</b>,</p>
+  //         <p>Thank you for your order! Below are your order details:</p>
 
-//   // 🧾 Professional HTML invoice design (simple but clean)
-//   const htmlContent = `
-//     <div style="font-family: Arial, sans-serif; padding: 20px; background: #f9f9f9;">
-//       <div style="max-width: 600px; margin: auto; background: white; padding: 20px; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.1)">
-//         <h2 style="text-align: center; color: #2563eb;">BikeShop Invoice</h2>
-//         <p>Hi <b>${cartMail}</b>,</p>
-//         <p>Thank you for your order! Below are your order details:</p>
+  //         <h3 style="color:#111">🧾 Order Summary</h3>
+  //         <p><b>Transaction ID:</b> ${order.transactionId}</p>
+  //         <p><b>Payment Method:</b> ${order.paymentMethod}</p>
+  //         <p><b>Payment Status:</b> <span style="color:${order.paymentStatus === "completed" ? "green" : "orange"}">${order.paymentStatus}</span></p>
 
-//         <h3 style="color:#111">🧾 Order Summary</h3>
-//         <p><b>Transaction ID:</b> ${order.transactionId}</p>
-//         <p><b>Payment Method:</b> ${order.paymentMethod}</p>
-//         <p><b>Payment Status:</b> <span style="color:${order.paymentStatus === "completed" ? "green" : "orange"}">${order.paymentStatus}</span></p>
+  //         <h3 style="margin-top:20px;">🛍️ Products</h3>
+  //         <table style="width:100%; border-collapse: collapse;">
+  //           <thead>
+  //             <tr style="background:#2563eb; color:white;">
+  //               <th style="padding:8px; border:1px solid #ddd;">Product</th>
+  //               <th style="padding:8px; border:1px solid #ddd;">Price</th>
+  //               <th style="padding:8px; border:1px solid #ddd;">Quantity</th>
+  //             </tr>
+  //           </thead>
+  //           <tbody>
+  //             ${order.paymentItem
+  //               .map(
+  //                 (item) => `
+  //               <tr>
+  //                 <td style="padding:8px; border:1px solid #ddd;">${item.productName}</td>
+  //                 <td style="padding:8px; border:1px solid #ddd;">$${item.productPrice}</td>
+  //                 <td style="padding:8px; border:1px solid #ddd;">${item.prodcutQuantity}</td>
+  //               </tr>
+  //             `
+  //               )
+  //               .join("")}
+  //           </tbody>
+  //         </table>
 
-//         <h3 style="margin-top:20px;">🛍️ Products</h3>
-//         <table style="width:100%; border-collapse: collapse;">
-//           <thead>
-//             <tr style="background:#2563eb; color:white;">
-//               <th style="padding:8px; border:1px solid #ddd;">Product</th>
-//               <th style="padding:8px; border:1px solid #ddd;">Price</th>
-//               <th style="padding:8px; border:1px solid #ddd;">Quantity</th>
-//             </tr>
-//           </thead>
-//           <tbody>
-//             ${order.paymentItem
-//               .map(
-//                 (item) => `
-//               <tr>
-//                 <td style="padding:8px; border:1px solid #ddd;">${item.productName}</td>
-//                 <td style="padding:8px; border:1px solid #ddd;">$${item.productPrice}</td>
-//                 <td style="padding:8px; border:1px solid #ddd;">${item.prodcutQuantity}</td>
-//               </tr>
-//             `
-//               )
-//               .join("")}
-//           </tbody>
-//         </table>
+  //         <p style="margin-top:20px; font-size:14px; color:#555;">If you have any questions, feel free to reply to this email.</p>
 
-//         <p style="margin-top:20px; font-size:14px; color:#555;">If you have any questions, feel free to reply to this email.</p>
+  //         <hr/>
+  //         <p style="text-align:center; font-size:12px; color:#aaa;">© ${new Date().getFullYear()} BikeShop. All rights reserved.</p>
+  //       </div>
+  //     </div>
+  //   `;
 
-//         <hr/>
-//         <p style="text-align:center; font-size:12px; color:#aaa;">© ${new Date().getFullYear()} BikeShop. All rights reserved.</p>
-//       </div>
-//     </div>
-//   `;
+  //   try {
+  //     const { data } = await axios.post("/api/emailsend/invoice-send", {
+  //       to: cartMail,
+  //       subject: `Invoice for Your Order (${order.transactionId})`,
+  //       html: htmlContent, // sending HTML invoice instead of text
+  //     });
 
-//   try {
-//     const { data } = await axios.post("/api/emailsend/invoice-send", {
-//       to: cartMail,
-//       subject: `Invoice for Your Order (${order.transactionId})`,
-//       html: htmlContent, // sending HTML invoice instead of text
-//     });
+  //     alert(data.message || "Email sent successfully!");
+  //   } catch (error) {
+  //     console.error(error);
+  //     alert(error.response?.data?.error || "Failed to send email");
+  //   }
+  // };
 
-//     alert(data.message || "Email sent successfully!");
-//   } catch (error) {
-//     console.error(error);
-//     alert(error.response?.data?.error || "Failed to send email");
-//   }
-// };
+  const handleSendEmail = async (order) => {
+    console.log(order, "📦 Order data before sending email");
 
+    const cartMail = order?.userCartEmail;
+    if (!cartMail) {
+      alert("❌ User email not found!");
+      return;
+    }
 
-
-
-
-const handleSendEmail = async (order) => {
-  console.log(order, "📦 Order data before sending email");
-
-  const cartMail = order?.userCartEmail;
-  if (!cartMail) {
-    alert("❌ User email not found!");
-    return;
-  }
-
-  // ✅ Build professional invoice HTML
-  const invoiceHtml = `
+    // ✅ Build professional invoice HTML
+    const invoiceHtml = `
     <div style="
       background-color: #ec8927;
       padding: 20px;
@@ -179,7 +172,9 @@ const handleSendEmail = async (order) => {
           <p><strong>Payment Method:</strong> ${order.paymentMethod}</p>
           <p><strong>Payment Status:</strong> 
             <span style="
-              color: ${order.paymentStatus === "completed" ? "green" : "orange"};
+              color: ${
+                order.paymentStatus === "completed" ? "green" : "orange"
+              };
               font-weight: bold;
             ">
               ${order.paymentStatus}
@@ -201,7 +196,9 @@ const handleSendEmail = async (order) => {
               </tr>
             </thead>
             <tbody>
-              ${order.paymentItem.map(item => `
+              ${order.paymentItem
+                .map(
+                  (item) => `
                 <tr style="border-bottom: 1px solid #e2e8f0;">
                   <td style="padding: 10px;">
                     <img src="${item.productImage}" alt="${item.productName}" width="70" style="border-radius: 8px;"/>
@@ -210,7 +207,9 @@ const handleSendEmail = async (order) => {
                   <td style="padding: 10px;">${item.prodcutQuantity}</td>
                   <td style="padding: 10px;">$${item.productPrice}</td>
                 </tr>
-              `).join('')}
+              `
+                )
+                .join("")}
             </tbody>
           </table>
         </div>
@@ -249,31 +248,19 @@ const handleSendEmail = async (order) => {
     </div>
   `;
 
-  try {
-    const { data } = await axios.post("/api/emailsend/invoice-send", {
-      to: cartMail,
-      subject: `🧾 Invoice for Order ${order.transactionId}`,
-      html: invoiceHtml,
-    });
+    try {
+      const { data } = await axios.post("/api/emailsend/invoice-send", {
+        to: cartMail,
+        subject: `🧾 Invoice for Order ${order.transactionId}`,
+        html: invoiceHtml,
+      });
 
-    alert(data.message || "✅ Email sent successfully!");
-  } catch (error) {
-    console.error(error);
-    alert(error.response?.data?.error || "❌ Failed to send email");
-  }
-};
-
-
-
-
-
-
-
-
-
-
-
-
+      alert(data.message || "✅ Email sent successfully!");
+    } catch (error) {
+      console.error(error);
+      alert(error.response?.data?.error || "❌ Failed to send email");
+    }
+  };
 
   if (isLoading)
     return (
@@ -316,7 +303,9 @@ const handleSendEmail = async (order) => {
         <Table>
           <TableHeader className="bg-gray-100 dark:bg-gray-800">
             <TableRow>
-              <TableHead className="text-gray-800 dark:text-gray-100">#</TableHead>
+              <TableHead className="text-gray-800 dark:text-gray-100">
+                #
+              </TableHead>
               <TableHead className="text-gray-800 dark:text-gray-100">
                 User Email
               </TableHead>

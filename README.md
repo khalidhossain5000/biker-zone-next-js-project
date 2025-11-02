@@ -24,7 +24,7 @@ https://biker-zone-next-js-project.vercel.app
 - Featured Bike Added on the Home page.
 - Shopping cart with secure checkout process.
 - Order Mangement in admin dashboard and order history in user dashboard.
-
+- invoice send to user registerd email
 ## Setup & installation instructions
 
 1.Clone the repository
@@ -84,3 +84,21 @@ http://localhost:3000
 - SweetAlert2
 - Swiper
 - Next Themes
+- NodeMailer
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
