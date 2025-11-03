@@ -3,6 +3,7 @@
 import React from "react";
 import axios from "axios";
 import { useQuery } from "@tanstack/react-query";
+import logo from '../../../../assets/logo/logo-go.png'
 import {
   Table,
   TableBody,
@@ -192,6 +193,127 @@ const OrdersTable = () => {
       alert(error.response?.data?.error || "❌ Failed to send email");
     }
   };
+
+
+
+
+
+// const handleSendEmail = async (order) => {
+//   console.log(order, "📦 Order data before sending email");
+//   const cartMail = order?.userCartEmail;
+//   if (!cartMail) {
+//     alert("❌ User email not found!");
+//     return;
+//   }
+
+// const invoiceHtml = `
+// <div style="background:#f4f6f8;padding:40px 0;font-family:Arial,sans-serif;">
+//   <div style="max-width:900px;margin:auto;background:#fff;border-radius:12px;overflow:hidden;box-shadow:0 10px 30px rgba(0,0,0,0.15);position:relative;">
+
+//     <!-- Header -->
+//     <div style="display:flex;justify-content:space-between;align-items:center;background:linear-gradient(135deg,#0371a2,#04c6f8);color:#fff;padding:30px 0px;border-bottom:4px solid #0371a2;flex-wrap:wrap;">
+//       <div style="display:flex;align-items:center;gap:15px;flex:1;">
+//         <img src="https://i.ibb.co.com/SDVK7yPN/logo-go.png" style="width:80px;height:auto;border-radius:12px;background:#fff;padding:5px;" />
+//         <div style="text-align:left;">
+//           <h1 style="margin:0;font-size:26px;font-weight:bold;">BikeShop</h1>
+//           <p style="margin:2px 0 0;font-size:14px;opacity:0.9;">Premium Motorcycle Store</p>
+//         </div>
+//       </div>
+//       <div style="text-align:right;flex:1;margin-top:10px;">
+//         <h2 style="margin:0;font-size:22px;font-weight:bold;">INVOICE</h2>
+//         <p style="margin:5px 0 0;font-size:14px;opacity:0.9;">Invoice No-${order.transactionId}</p>
+//         <p style="margin:2px 0 0;font-size:14px;opacity:0.9;">${new Date().toLocaleDateString()}</p>
+//       </div>
+//     </div>
+
+//     <!-- Customer & Payment Info -->
+//     <div style="padding:30px 40px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:20px;text-align:left;">
+//       <div style="flex:1;">
+//         <h3 style="margin:0 0 10px;font-size:18px;color:#0371a2;border-bottom:2px solid #e5e7eb;padding-bottom:5px;">Customer Info</h3>
+//         <p style="margin:5px 0;font-size:14px;"><strong>Email:</strong> ${order.userCartEmail}</p>
+//       </div>
+//       <div style="flex:1;">
+//         <h3 style="margin:0 0 0px;font-size:18px;color:#0371a2;border-bottom:2px solid #e5e7eb;padding-bottom:5px;">Payment Info</h3>
+//         <p style="margin:5px 0;font-size:14px;"><strong>Payment Method:</strong> ${order.paymentMethod}</p>
+//         <p style="margin:5px 0;font-size:14px;"><strong>Status:</strong> 
+//           <span style="background-color:${order.paymentStatus==='completed'?'#10b981':'#f59e0b'};color:#fff;padding:4px 10px;border-radius:5px;font-weight:600;text-transform:uppercase;">${order.paymentStatus}</span>
+//         </p>
+//       </div>
+//     </div>
+
+//     <!-- Product Table -->
+//     <div style="padding:0 40px 30px;text-align:center;">
+//       <h3 style="font-size:18px;color:#0371a2;margin-bottom:12px;">Purchased Items</h3>
+//       <table style="width:100%;border-collapse:collapse;border:1px solid #e5e7eb;font-size:14px;text-align:center;">
+//         <thead style="background:#f0f4f8;">
+//           <tr>
+//             <th style="padding:10px;border-bottom:1px solid #e5e7eb;">Image</th>
+//             <th style="padding:10px;border-bottom:1px solid #e5e7eb;">Product</th>
+//             <th style="padding:10px;border-bottom:1px solid #e5e7eb;">Qty</th>
+//             <th style="padding:10px;border-bottom:1px solid #e5e7eb;">Price</th>
+//           </tr>
+//         </thead>
+//         <tbody>
+//           ${order.paymentItem.map(item => `
+//             <tr>
+//               <td style="padding:10px;border-top:1px solid #e5e7eb;">
+//                 <img src="${item.productImage}" style="width:60px;border-radius:6px;border:1px solid #ddd;" />
+//               </td>
+//               <td style="padding:10px;border-top:1px solid #e5e7eb;">${item.productName}</td>
+//               <td style="padding:10px;border-top:1px solid #e5e7eb;text-align:center;">${item.prodcutQuantity}</td>
+//               <td style="padding:10px;border-top:1px solid #e5e7eb;color:#0371a2;font-weight:600;">$${item.productPrice}</td>
+//             </tr>
+//           `).join('')}
+//         </tbody>
+//       </table>
+//     </div>
+
+//     <!-- Total + Status -->
+//     <div style="display:flex;justify-content:space-around;align-items:center;background:#f3f6f8;border-top:2px solid #e5e7eb;padding:25px;position:relative;flex-wrap:wrap;">
+//       <div style="flex:1;min-width:150px;text-align:center;margin-bottom:10px;">
+//         <p style="margin:0 0 5px;font-size:14px;">Order Status:</p>
+//         <span style="background:#0371a2;color:#fff;padding:6px 12px;border-radius:6px;font-weight:600;font-size:14px;letter-spacing:0.5px;box-shadow:0 2px 5px rgba(0,0,0,0.2);">RECEIVED</span>
+//       </div>
+//       <div style="flex:1;text-align:center;min-width:150px;margin-bottom:10px;">
+//         <strong style="font-size:18px;">Total:</strong>
+//         <span style="font-size:20px;font-weight:bold;color:#0371a2;margin-left:10px;">
+//           $${order.paymentItem.reduce((sum,item)=>sum+Number(item.productPrice),0).toFixed(2)}
+//         </span>
+//       </div>
+
+//       <!-- 3D Embossed Stamp -->
+//       <div style="position:absolute;bottom:20px;right:20px;color:rgba(3,113,162,0.15);border:3px solid rgba(3,113,162,0.2);padding:10px 18px;font-size:26px;font-weight:900;text-transform:uppercase;transform:rotate(-12deg);border-radius:8px;text-align:center;white-space:nowrap;
+//           box-shadow: 2px 2px 5px rgba(0,0,0,0.2), inset 0 0 5px rgba(255,255,255,0.3);">
+//         RECEIVED
+//       </div>
+//     </div>
+
+//     <!-- Footer -->
+//     <div style="background:linear-gradient(135deg,#0371a2,#04c6f8);color:#fff;text-align:center;padding:25px;">
+//       <p style="margin:0 0 6px;">Need help? Contact us at <a href="mailto:support@bikeshop.com" style="color:#b7e3ef;text-decoration:none;">support@bikeshop.com</a></p>
+//       <p style="margin:0;font-size:13px;opacity:0.85;">© ${new Date().getFullYear()} BikeShop. All rights reserved.</p>
+//     </div>
+
+//   </div>
+// </div>
+// `;
+
+
+//   try {
+//     const { data } = await axios.post("/api/emailsend/invoice-send", {
+//       to: cartMail,
+//       subject: `🧾 Invoice No-${order.transactionId}`,
+//       html: invoiceHtml,
+//     });
+//     alert(data.message || "✅ Email sent successfully!");
+//   } catch (error) {
+//     console.error(error);
+//     alert(error.response?.data?.error || "❌ Failed to send email");
+//   }
+// };
+
+
+
 
   if (isLoading)
     return (
