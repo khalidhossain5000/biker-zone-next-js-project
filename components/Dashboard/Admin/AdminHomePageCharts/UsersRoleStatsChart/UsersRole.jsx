@@ -3,7 +3,6 @@
 import React from "react";
 import axios from "axios";
 import { useQuery } from "@tanstack/react-query";
-import { TrendingUp } from "lucide-react";
 import {
   Bar,
   BarChart,
@@ -14,26 +13,17 @@ import {
   Cell,
 } from "recharts";
 
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 import {
   ChartContainer,
   ChartTooltip,
   ChartTooltipContent,
-  ChartConfig,
 } from "@/components/ui/chart";
 import SkletonLoading from "@/components/(Global)/Loader/SkletonLoading/SkletonLoading";
-import Loading from "@/components/(Global)/Loader/MainLoading/Loading";
 
 const UsersRoleBar = () => {
-  // 🔹 Fetch user role stats
+  //  Fetch user role stats
   const {
     data: roleStats = [],
     isLoading,
@@ -42,19 +32,18 @@ const UsersRoleBar = () => {
     queryKey: ["user-roles"],
     queryFn: async () => {
       const res = await axios.get("/api/admin/stats/users-stats");
-     
+
       return res.data.roleStats || [];
     },
   });
 
-  if (isLoading)
-    return <SkletonLoading/>
+  if (isLoading) return <SkletonLoading />;
   if (error)
     return (
-      <h2 className="text-center text-red-500">Error loading user roles 😢</h2>
+      <h2 className="text-center text-red-500">Error loading user roles </h2>
     );
 
-  // 🔹 Prepare chart data for vertical bar chart
+  //  Prepare chart data for vertical bar chart
   const chartData = roleStats.map((role) => ({
     role: role._id,
     count: role.count,
@@ -77,7 +66,9 @@ const UsersRoleBar = () => {
   return (
     <Card className="shadow-xl shadow-green-200 border-none h-full   w-full mx-auto">
       <CardHeader>
-        <CardTitle className={`text-center`}>Total User And Role Based Count Stats</CardTitle>
+        <CardTitle className={`text-center`}>
+          Total User And Role Based Count Stats
+        </CardTitle>
       </CardHeader>
 
       <CardContent>
@@ -127,8 +118,6 @@ const UsersRoleBar = () => {
           </BarChart>
         </ChartContainer>
       </CardContent>
-
-    
     </Card>
   );
 };
