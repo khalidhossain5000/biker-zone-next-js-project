@@ -41,3 +41,8 @@ body {
     @apply bg-background text-foreground;
   }
 } */
+.particle {
+  pointer-events: none;
+  position: absolute;
+  border-radius: 50%;
+}
