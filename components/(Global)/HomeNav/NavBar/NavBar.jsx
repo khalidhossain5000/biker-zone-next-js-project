@@ -10,6 +10,7 @@ const NavBar = () => {
   return (
     <nav className="sticky  top-0 py-6 container mx-auto flex items-center justify-between lg:pr-3 xl:pr-1">
       <div className="logo dark:hidden">
+        <a href="/" className="cursor-pointer">
         <Image
           src={logo}
           width={300}
@@ -17,17 +18,20 @@ const NavBar = () => {
           className="w-46 lg:w-[300px]"
           alt="Picture of the site logo"
         ></Image>
+        </a>
       </div>
 
       {/* dark logo */}
       <div className="logo hidden dark:block">
+        <a href="/" className="cursor-pointer">
         <Image
           src={darklogo}
           width={300}
           height={500}
-          className="w-46 lg:w-[300px"
+          className="w-46 lg:w-[300px]"
           alt="Picture of the site logo"
         ></Image>
+        </a>
       </div>
       {/* theme and nav menu */}
       <div className="hidden lg:block">
