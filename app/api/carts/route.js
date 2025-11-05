@@ -61,17 +61,7 @@ export async function GET(req) {
   });
 }
 
-//dlete cart item from the db
 
-// export async function DELETE(req) {
-//   const cartCollection = await getCartsCollection();
-//   const { searchParams } = new URL(req.url);
-//   const productId = searchParams.get("id");
-//   const result = await cartCollection.deleteOne({
-//     _id: new ObjectId(productId),
-//   });
-//   return NextResponse.json({ success: true, result });
-// }
 
 export async function DELETE(req) {
   try {

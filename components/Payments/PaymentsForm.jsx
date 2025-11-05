@@ -16,6 +16,7 @@ const PaymentsForm = () => {
   };
   const cartItem = { ...finalCartData };
   console.log("this is cartItem", cartItem,'final cart item',finalCartData,userCartEmail);
+  
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!transactionId) {
