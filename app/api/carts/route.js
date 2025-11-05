@@ -67,10 +67,10 @@ export async function DELETE(req) {
   try {
     const cartCollection = await getCartsCollection();
 
-    // URL থেকে query params নেওয়া
+    
     const { searchParams } = new URL(req.url);
     const productId = searchParams.get("id");
-    const userEmail = searchParams.get("email"); // ইউজারের email নেওয়া
+    const userEmail = searchParams.get("email"); 
     console.log(userEmail, "this is user email in dlete ");
     if (!productId || !userEmail) {
       return NextResponse.json(
@@ -79,10 +79,10 @@ export async function DELETE(req) {
       );
     }
 
-    // Delete query: একই সাথে productId এবং userEmail match করতে হবে
+ 
     const result = await cartCollection.updateOne(
-      { userEmail }, // ইউজারের cart
-      { $pull: { cartItems: { productId } } } // items array থেকে remove
+      { userEmail },
+      { $pull: { cartItems: { productId } } } 
     );
 
     return NextResponse.json({ success: true, result });
@@ -93,4 +93,11 @@ export async function DELETE(req) {
       { status: 500 }
     );
   }
+}
+
+
+//update quantity reduce
+
+export async function PATCH(req){
+
 }
