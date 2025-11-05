@@ -30,32 +30,44 @@ const FeaturedBike = () => {
         Best bike collection
       </h5>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        {featuredBikes.slice(0, 3).map((bike) => (
-          <div
-            key={bike._id}
-            className="bg-white dark:bg-gray-900 shadow-md rounded-lg overflow-hidden flex flex-col pt-6 xl:pt-16"
-          >
-            <img
-              src={bike.image || "https://i.ibb.co.com/5WJVM6cs/hrnets.jpg"}
-              alt={bike.model}
-              className="w-full h-48 object-cover"
-            />
-            <div className="p-4 flex flex-col gap-2 flex-1">
-              <h3 className="text-lg font-semibold text-gray-800 dark:text-gray-100">
-                {bike.model}
-              </h3>
-              <p className="text-gray-600 dark:text-gray-300">
-                Price: ৳{bike.price}
-              </p>
-              <p className="text-gray-600 dark:text-gray-300">
-                Brand: {bike.brand}
-              </p>
-              <Button className="mt-auto cursor-pointer">View Details</Button>
-            </div>
-          </div>
-        ))}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+  {featuredBikes.slice(0, 3).map((bike) => (
+    <div
+      key={bike._id}
+      className="bg-white dark:bg-gray-900 rounded-2xl shadow-lg hover:shadow-2xl transition-transform transform hover:-translate-y-1 flex flex-col overflow-hidden"
+    >
+      {/* Image */}
+      <div className="relative">
+        <img
+          src={bike.image || "https://i.ibb.co/5WJVM6cs/hrnets.jpg"}
+          alt={bike.model}
+          className="w-full h-56 object-cover rounded-t-2xl"
+        />
+        <span className="absolute top-4 left-4 bg-orange-500 text-white text-xs font-bold uppercase px-3 py-1 rounded-full shadow-md">
+          {bike.brand}
+        </span>
       </div>
+
+      {/* Card Content */}
+      <div className="p-6 flex flex-col gap-4 flex-1">
+        <h3 className="text-xl font-extrabold text-gray-800 dark:text-gray-100 tracking-tight">
+          {bike.model}
+        </h3>
+        <p className="text-gray-600 dark:text-gray-300 font-medium">
+          Price: ৳{bike.price}
+        </p>
+        <p className="text-gray-500 dark:text-gray-400 text-sm">
+          Brand: {bike.brand}
+        </p>
+        <Button className="mt-auto cursor-pointer hover:bg-orange-600 text-white font-semibold py-3 rounded-xl shadow-md transition-all duration-300">
+          View Details
+        </Button>
+      </div>
+    </div>
+  ))}
+
+</div>
+
     </div>
   );
 };

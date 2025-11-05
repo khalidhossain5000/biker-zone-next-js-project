@@ -85,6 +85,7 @@ http://localhost:3000
 - Swiper
 - Next Themes
 - NodeMailer
+- Gsap - Animation
 
 
 
