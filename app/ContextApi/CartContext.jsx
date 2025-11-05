@@ -63,9 +63,7 @@ export const CartProvider = ({ children }) => {
   };
 
   //reduce item quantity after payment success
-  const reduceQuantity=async ()=>{
-    
-  }
+  
   const info = {
     cartCount,
     finalCartData,

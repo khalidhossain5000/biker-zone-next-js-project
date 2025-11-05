@@ -16,7 +16,7 @@ const PaymentsForm = () => {
   };
   const cartItem = { ...finalCartData };
   console.log("this is cartItem", cartItem,'final cart item',finalCartData,userCartEmail);
-  
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!transactionId) {
@@ -38,10 +38,13 @@ const PaymentsForm = () => {
         text: "Your payment has been completed successfully!",
         confirmButtonColor: "#fa8207",
       });
-    }
-    handleClearUserCart()
+      const orderId = res.data.orderId;
+       await axios.patch(`/api/carts?id=${orderId}`);
+       handleClearUserCart()
     console.log(res, "this is payemtn success res");
     setTransactionId("");
+    }
+    
   };
   return (
     <section className="py-16 bg-gray-50 dark:bg-gray-900">

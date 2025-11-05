@@ -8,7 +8,7 @@ export async function POST(req) {
     const paymentCollection = await getPaymentsCollection();
     const result = await paymentCollection.insertOne(data);
     return NextResponse.json(
-      { message: "Payment data Added Successfully" },result
+      { message: "Payment data Added Successfully" ,result,orderId: result.insertedId}
     );
   } catch (error) {
     console.log("add payment info to the db error", error);

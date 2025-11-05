@@ -304,7 +304,7 @@ const BikeForm = () => {
             </label>
             <input
               type="number"
-              {...register("quantity", { required: true })}
+              {...register("quantity", { required: true,valueAsNumber: true })}
               placeholder="Available quantity"
               className="w-full p-3 border rounded-lg border-gray-300 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-100 focus:outline-none focus:ring-1 focus:ring-[#e76f51] focus:border-[#e76f51]"
             />

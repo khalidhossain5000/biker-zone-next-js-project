@@ -1,14 +1,13 @@
-import { getCartsCollection } from "@/lib/dbcollections";
+import { getBikesCollection, getCartsCollection, getPaymentsCollection } from "@/lib/dbcollections";
 import { ObjectId } from "mongodb";
 import { NextResponse } from "next/server";
-
 
 //New one
 export async function POST(req) {
   try {
     const body = await req.json();
-    const { userEmail, product } = body; 
-    
+    const { userEmail, product } = body;
+
     // product = single cart item
     if (!product || !userEmail) {
       return NextResponse.json(
@@ -61,17 +60,14 @@ export async function GET(req) {
   });
 }
 
-
-
 export async function DELETE(req) {
   try {
     const cartCollection = await getCartsCollection();
 
-    
     const { searchParams } = new URL(req.url);
     const productId = searchParams.get("id");
-    const userEmail = searchParams.get("email"); 
-    console.log(userEmail, "this is user email in dlete ");
+    const userEmail = searchParams.get("email");
+
     if (!productId || !userEmail) {
       return NextResponse.json(
         { success: false, message: "Product ID or User email missing" },
@@ -79,10 +75,9 @@ export async function DELETE(req) {
       );
     }
 
- 
     const result = await cartCollection.updateOne(
       { userEmail },
-      { $pull: { cartItems: { productId } } } 
+      { $pull: { cartItems: { productId } } }
     );
 
     return NextResponse.json({ success: true, result });
@@ -95,9 +90,37 @@ export async function DELETE(req) {
   }
 }
 
+export async function PATCH(req) {
+  try {
+    const { searchParams } = new URL(req.url);
+    const orderId = searchParams.get("id");
 
-//update quantity reduce
+    if (!orderId)
+      return NextResponse.json({ success: false, message: "Order ID missing" }, { status: 400 });
 
-export async function PATCH(req){
+    const orders = await getPaymentsCollection();
+    const bikes = await getBikesCollection();
 
+    const order = await orders.findOne({ _id: new ObjectId(orderId) });
+    if (!order)
+      return NextResponse.json({ success: false, message: "Order not found" }, { status: 404 });
+
+    // mark payment as success
+    await orders.updateOne({ _id: new ObjectId(orderId) }, { $set: { paymentStatus: "success" } });
+
+    // reduce quantity safely
+    const updates = order.paymentItem.map((item) =>
+      bikes.updateOne(
+        { _id: new ObjectId(item.productId), quantity: { $gte: Number(item.quantity) } },
+        { $inc: { quantity: -Number(item.quantity) } }
+      )
+    );
+
+    await Promise.all(updates);
+
+    return NextResponse.json({ success: true, message: "All product quantities updated successfully." });
+  } catch (error) {
+    console.error("Update order products error:", error);
+    return NextResponse.json({ success: false, message: "Failed to update quantities" }, { status: 500 });
+  }
 }
