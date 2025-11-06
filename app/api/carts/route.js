@@ -46,7 +46,7 @@ export async function POST(req) {
 }
 
 //fetch cart data from the db
-// 🟡 Get Cart by User (GET)
+
 export async function GET(req) {
   const cartCollection = await getCartsCollection();
   const { searchParams } = new URL(req.url);
